@@ -157,115 +157,8 @@
                         <h5 class = "card-header">
                             Upcoming Events
                         </h5>
-
                         <div class = "card-body">
-                            <table class = "table">
-                                <thead class="thead-light">
-                                    <tr>
-                                        <th colspan="2">
-                                            Day 1
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            Event Name
-                                        </td>
-                                        <td>
-                                            Timing
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Event Name
-                                        </td>
-                                        <td>
-                                            Timing
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Event Name
-                                        </td>
-                                        <td>
-                                            Timing
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-
-                            <table class = "table">
-                                <thead class="thead-light">
-                                    <tr>
-                                        <th colspan="2">
-                                            Day 2
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            Event Name
-                                        </td>
-                                        <td>
-                                            Timing
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Event Name
-                                        </td>
-                                        <td>
-                                            Timing
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Event Name
-                                        </td>
-                                        <td>
-                                            Timing
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-
-                            <table class = "table">
-                                <thead class="thead-light">
-                                    <tr>
-                                        <th colspan="2">
-                                            Day 3
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            Event Name
-                                        </td>
-                                        <td>
-                                            Timing
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Event Name
-                                        </td>
-                                        <td>
-                                            Timing
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Event Name
-                                        </td>
-                                        <td>
-                                            Timing
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                        	<table id="upcomingEvents" class = "table"></table>
                         </div>
                     </div>
                 </div>
@@ -293,13 +186,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
         <script src="https://getbootstrap.com/assets/js/vendor/popper.min.js"></script>
         <script src="https://getbootstrap.com/dist/js/bootstrap.min.js"></script>
-
-        <script>
-            $( function() {
-                $( "#datepicker" ).datepicker({
-                    autoSize: true
-                });
-            });
-        </script>
+		<script src= "https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.1/moment.min.js"></script>
+        <script src="/ninerevents/js/ninerEvents.js"> </script>
     </body>
 </html>
