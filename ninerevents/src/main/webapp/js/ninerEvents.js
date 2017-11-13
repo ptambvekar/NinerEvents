@@ -22,7 +22,7 @@ $(function() {
 				sResult += moment(date).format('LL')+ '</th> </tr> </thead><tbody>';
 				events.forEach(function(event){
 					sResult += '<tr><td class="col-*-6">' + event.eventName + '</td>';
-					sResult += '<td class="col-*-6">' + event.eventDescription + '</td> </tr>';
+					sResult += '<td class="col-*-6">' + event.start_time + '</td> </tr>';
 					sResult += '</tbody>'
 				});
 			});
@@ -30,7 +30,7 @@ $(function() {
 	}
 	
 	$.ajax({
-		  url: '/ninerevents/webapi/upcomingEvents',
+		  url: '/ninerevents/webapi/event/upcomingEvents',
 		  success: upcomingEventsSuccess,
 		  error:function(resp){
 			  console && console.log('Error in geting upcoming events:',resp);
