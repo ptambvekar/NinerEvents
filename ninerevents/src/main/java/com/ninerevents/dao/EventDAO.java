@@ -1,12 +1,16 @@
 package com.ninerevents.dao;
 
+import java.util.Date;
+
 /*
  * This class should act as a DAO for the Events related data. 
  * */
 
 import java.util.List;
+
 import javax.sql.DataSource;
 
+import com.ninerevents.model.CalendarEvent;
 import com.ninerevents.model.Event;
 
 public interface EventDAO {
@@ -22,6 +26,8 @@ public interface EventDAO {
    */
    
    public List<Event> listEvents();
+
+public List<CalendarEvent> getMonthlyEvents(Date startDate, Date endDate);
  
    
 }

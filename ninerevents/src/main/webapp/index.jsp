@@ -16,6 +16,11 @@
 
         <!-- jQuery UI -->
         <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+
+        <!-- DatePicker CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.css">
+        
+
     </head>
 
     <style>
@@ -44,7 +49,7 @@
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="nav navbar-nav ml-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="">
                                 <i class="material-icons md-18">home</i>
                                 Home
                             </a>
@@ -147,6 +152,7 @@
                         </p>
 
                         <div class = "card-body">
+                            <div id="datepicker" data-date="<% new java.util.Date(); %>"></div>
                             <span id="datepicker"></span>
                         </div>
                     </div>
@@ -187,6 +193,10 @@
         <script src="https://getbootstrap.com/assets/js/vendor/popper.min.js"></script>
         <script src="https://getbootstrap.com/dist/js/bootstrap.min.js"></script>
 		<script src= "https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.1/moment.min.js"></script>
+		<!-- bootstrap datepicker -->		
+		<script src= "https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.js"></script>
+		<!-- custom js -->		        
         <script src="/ninerevents/js/ninerEvents.js"> </script>
+        
     </body>
 </html>

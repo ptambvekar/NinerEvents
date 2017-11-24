@@ -1,12 +1,15 @@
 package com.ninerevents.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.sql.DataSource;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import com.ninerevents.model.CalendarEvent;
 import com.ninerevents.model.Event;
+import com.ninerevents.utils.CalenderEventMapper;
 import com.ninerevents.utils.EventMapper;
 
 public class EventDAOImpl implements EventDAO {
@@ -24,4 +27,11 @@ public class EventDAOImpl implements EventDAO {
 		return events;
 	}
 
+	
+	public List<CalendarEvent> getMonthlyEvents(Date startDate, Date endDate) {
+		String SQL = "select * from event where event_date between ? and ?";
+		jdbcTemplateObject = new JdbcTemplate(dataSource);
+		List<CalendarEvent> events = jdbcTemplateObject.query(SQL, new Object[] {startDate,endDate},new CalenderEventMapper());
+		return events;
+	}
 }

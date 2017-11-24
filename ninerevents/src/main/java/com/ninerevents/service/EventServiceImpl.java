@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ninerevents.dao.EventDAO;
+import com.ninerevents.model.CalendarEvent;
 import com.ninerevents.model.Event;
 
 @Service
@@ -38,6 +39,13 @@ public class EventServiceImpl implements EventsService{
 			}
 		}
 		return eventsMap;
+	}
+	
+	public List<CalendarEvent> getMonthlyEvents(Date startDate, Date endDate){
+		
+		return eventJDBCTemplate.getMonthlyEvents(startDate,endDate);
+		
+		
 	}
 
 	

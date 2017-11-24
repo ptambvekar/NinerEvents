@@ -22,7 +22,7 @@ $(function() {
 				sResult += moment(date).format('LL')+ '</th> </tr> </thead><tbody>';
 				events.forEach(function(event){
 					sResult += '<tr><td class="col-*-6">' + event.eventName + '</td>';
-					sResult += '<td class="col-*-6">' + event.start_time + '</td> </tr>';
+					sResult += '<td class="col-*-6">' + moment(event.start_time,'HH:mm:ss').format('HH:mm A')+ '</td> </tr>';
 					sResult += '</tbody>'
 				});
 			});
