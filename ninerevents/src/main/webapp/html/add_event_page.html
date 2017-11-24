@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- <head>
+    <title>Niner Events</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-timepicker.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap-timepicker.min.js"></script>
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script>
+      $( function() {
+
+      if ( $('[type="date"]').prop('type') != 'date' ) {
+      $('[type="date"]').datepicker();
+      }
+        $( "#datepicker" ).datepicker();
+      } );
+    </script>
+
+    <script>
+      $(function(){
+      $('#startTime').timepicker();
+      $('#endTime').timepicker();
+      });
+    </script>
+</head> -->
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="https://getbootstrap.com/favicon.ico">
+    <title>Niner Events</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Google Material Icon Pack -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- jQuery UI -->
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+
+    <!-- Time Picker -->
+    <link rel="stylesheet" href="css/bootstrap-timepicker.min.css">
+
+</head>
+
+<style>
+    /* Fix NavBar to the top */
+    body {
+        min-height: 75rem;
+        padding-top: 4.5rem;
+    }
+
+    /* Size for Material Icons */
+    .material-icons.md-18 { font-size: 18px; }
+
+    /* Size of DatePicker */
+    .ui-datepicker {
+        font-size: 60%;
+    }
+</style>
+
+<body>
+	<!-- TODO - Find a Logo to display on the Nav Bar -->
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+      <a class="navbar-brand" href="#">Niner Events</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="nav navbar-nav ml-auto">
+                  <li class="nav-item active">
+                      <a class="nav-link" href="#">
+                          <i class="material-icons md-18">home</i>
+                          Home
+                      </a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="#">
+                          <i class="material-icons md-18">date_range</i>
+                          Events
+                      </a>
+                  </li>
+              </ul>
+      </div>
+  </nav>
+
+<div class="container-fluid">
+	<h3>Add New Event</h3>
+
+	<hr>
+	<form id="myForm" action="event/addEvent" method="post" name="eventForm">
+		<div class="form-group">
+			<label for="eventName">Event Name</label>
+			<input type="text" class="form-control" placeholder="Add event name" id="eventName">
+		</div>
+
+		<div class="form-group">
+			<label for="eventCategory">Category</label>
+      <div class="form-group">
+         <select class="form-control" id="exampleSelect1">
+           <option>Academic</option>
+           <option>Social</option>
+           <option>Recreational</option>
+          </select>
+       </div>
+
+		<div class="form-group">
+			<label for="eventDescription">Description</label>
+			<input type="text" class="form-control" placeholder="Add Event Description" id="eventDescription">
+		</div>
+
+		<div class="form-group">
+			<label for="eventVenue">Venue</label>
+			<input type="text" class="form-control" placeholder="Add Event Venue" id="eventVenue">
+		</div>
+
+		<div class="form-group">
+			<label for="datepicker">Event Date</label>
+		<p><input type="text" class="form-control" placeholder="Add Event Date" id="datepicker"></p>
+    </div>
+
+	  <label for="startTime">Start Time</label>
+    <div class="input-group bootstrap-timepicker timepicker" style="z-index:0">
+          <input id="startTime" type="text" class="form-control input-small" value="00:00:00">
+          <span class="input-group-addon"><i class="material-icons md-18">access_time</i></span>
+    </div>
+
+    <label for="endTime">End Time</label>
+    <div class="input-group bootstrap-timepicker timepicker" style="z-index:0">
+      <input id="endTime" type="text" class="form-control input-small" value="00:00:00">
+      <span class="input-group-addon"><i class="material-icons md-18">access_time</i></span>
+    </div>
+<br>
+
+			<input value="Create Event" type = "button" onclick='create();' class='btn btn-primary text-xs-center' />
+ </form>
+
+	<script>
+	function create() {
+		document.getElementById("myForm").action = "webapi/event/addEvent";
+	    document.getElementById("myForm").submit();
+	}
+	</script>
+      <!-- Bootstrap core JavaScript
+          ================================================== -->
+      <!-- Placed at the end of the document so the pages load faster -->
+      <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+      <script>window.jQuery || document.write('<script src="../../../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+      <script src="https://getbootstrap.com/assets/js/vendor/popper.min.js"></script>
+      <script src="https://getbootstrap.com/dist/js/bootstrap.min.js"></script>
+      <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+      <script src="js/bootstrap-timepicker-customized.js"></script>
+
+      <!-- Date Picker -->
+      <script>
+        $(function(){
+        if ( $('[type="date"]').prop('type') != 'date' ) {
+        $('[type="date"]').datepicker();
+        }
+          $( "#datepicker" ).datepicker();
+        });
+      </script>
+
+      <!-- Time Picker -->
+      <script>
+        $(function(){
+        $('#startTime').timepicker();
+        $('#endTime').timepicker();
+        });
+      </script>
+	  
+	  
+</body>
+
+</html>
