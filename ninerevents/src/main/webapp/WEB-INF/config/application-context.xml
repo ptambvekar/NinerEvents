@@ -21,7 +21,7 @@
       <property name = "password" value = ""/>
    </bean>
 
-   <!-- Definition for studentJDBCTemplate bean -->
+   <!-- Definition for eventJDBCTemplate bean -->
    <bean id = "eventJDBCTemplate" 
       class = "com.ninerevents.dao.EventDAOImpl">
       <property name = "dataSource" ref = "dataSource" />    

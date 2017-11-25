@@ -22,8 +22,16 @@ public interface EventDAO {
    */
    
    public List<Event> listEvents();
+
   
   public Event EventDetails(String id);
+
+   public List<Event> listImpEvents();
+   
+   public List<Event> listFeaturedEvents();
+   
+   public void insertEvents(Event event);
+
  
    
 }

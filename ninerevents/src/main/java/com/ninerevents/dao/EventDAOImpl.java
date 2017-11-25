@@ -37,4 +37,31 @@ public class EventDAOImpl implements EventDAO {
 
 	
 
+	public List<Event> listImpEvents() {
+		String SQL = "SELECT * FROM Event WHERE imp_flag = 'imp'";
+		jdbcTemplateObject = new JdbcTemplate(dataSource);
+		List<Event> events = jdbcTemplateObject.query(SQL, new EventMapper());
+		return events;
+	}
+	
+	public List<Event> listFeaturedEvents() {
+		String SQL = "SELECT * FROM Event WHERE featured_flag = 'featured'";
+		jdbcTemplateObject = new JdbcTemplate(dataSource);
+		List<Event> events = jdbcTemplateObject.query(SQL, new EventMapper());
+		return events;
+	}
+	
+	public void insertEvents(Event event){
+		
+		String SQL = "INSERT INTO EVENT " +
+			"(event_name, description, event_date, start_time, end_time, day_of_week ) VALUES (?, ?, ?, ?, ?, ?)";
+
+		jdbcTemplateObject = new JdbcTemplate(dataSource);
+
+		jdbcTemplateObject.update(SQL, new Object[] { event.getEventName(),
+			event.getEventDescription(),event.getEvent_date(), event.getStart_time(), event.getEnd_time(), event.getDay_of_week()
+		});
+	}
+
+
 }

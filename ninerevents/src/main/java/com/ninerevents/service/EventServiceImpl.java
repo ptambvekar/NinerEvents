@@ -39,6 +39,29 @@ public class EventServiceImpl implements EventsService{
 		}
 		return eventsMap;
 	}
+	
+
+	public List<Event> importantEvents() {
+		List <Event> eventsList= new ArrayList<Event>();
+		eventsList = eventJDBCTemplate.listImpEvents();
+		return eventsList;
+		
+	}
+	
+	public List<Event> featuredEvents() {
+		List <Event> eventsList= new ArrayList<Event>();
+		eventsList = eventJDBCTemplate.listFeaturedEvents();
+		return eventsList;
+		
+	}
+
+
+	public void addEvent(Event event) {
+		eventJDBCTemplate.insertEvents(event);
+	}
+
+
+	
 
 
 	@Override

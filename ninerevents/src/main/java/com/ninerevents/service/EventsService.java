@@ -15,4 +15,11 @@ public interface EventsService {
 	public Map<Date, List<Event>> upcomingEvents();
 	public Event eventDetail(String id);
 	//THis list of events will come from DAO layer (via service layer).
+	
+	public List<Event> importantEvents();
+	
+	public List<Event> featuredEvents();
+
+	public void addEvent(Event event);
+
 }
