@@ -11,7 +11,11 @@ public class Event {
 	private String eventName;
 	private String eventDescription;
 	private String eventCategory;
-	private String eventLocaltion;
+	private String venue_name;
+	private String first_name;
+	private String last_name;
+	private String email_address;
+	private String phone_no;
 	private Date event_date;
 	private Time start_time;
 	private Time end_time;
@@ -32,6 +36,35 @@ public class Event {
 	public String getEventDescription() {
 		return eventDescription;
 	}
+	
+	public void setfirst_name(String first_name) {
+		this.first_name = first_name;
+	}
+	public String getfirst_name() {
+		return first_name;
+	}
+	
+	public void setlast_name(String last_name) {
+		this.last_name = last_name;
+	}
+	public String getlast_name() {
+		return last_name;
+	}
+	
+	public void setemail_address(String email_address) {
+		this.email_address = email_address;
+	}
+	public String getemail_address() {
+		return email_address;
+	}
+	
+	public void setphone_number(String phone_no) {
+		this.phone_no = phone_no;
+	}
+	public String getphone_number() {
+		return phone_no;
+	}
+	
 	public void setEventDescription(String eventDescription) {
 		this.eventDescription = eventDescription;
 	}
@@ -41,11 +74,13 @@ public class Event {
 	public void setEventCategory(String eventCategory) {
 		this.eventCategory = eventCategory;
 	}
-	public String getEventLocaltion() {
-		return eventLocaltion;
+	
+	public void setvenue_name(String venue_name) {
+		this.venue_name = venue_name;
 	}
-	public void setEventLocaltion(String eventLocaltion) {
-		this.eventLocaltion = eventLocaltion;
+	
+	public String getvenue_name() {
+		return venue_name;
 	}
 	public Date getEvent_date() {
 		return event_date;
