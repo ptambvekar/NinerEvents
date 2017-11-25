@@ -10,6 +10,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -43,7 +44,7 @@ public class EventController {
 		return eventsMap;
 	}
 	
-	
+
 	@Path(value="/monthlyEvents")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -55,6 +56,17 @@ public class EventController {
 	}
 
 	
+	@Path(value="eventDetail")
+	@Produces(MediaType.APPLICATION_JSON)
+	@GET
+	public Event eventDetail(@QueryParam("event_id") String id  ){		
+		//creation of this map will be in service layer
+		Event eventDetail = service.eventDetail(id);
+		
+		return eventDetail;
+	}
+	
+
 	@Path(value="importantEvents")
 	@Produces(MediaType.APPLICATION_JSON)
 	@GET
@@ -82,6 +94,5 @@ public class EventController {
 		//creation of this list will be in service layer
 		service.addEvent(event);
 	}
-	
 
 }

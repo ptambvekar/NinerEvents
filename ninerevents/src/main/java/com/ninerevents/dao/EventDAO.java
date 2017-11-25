@@ -14,6 +14,7 @@ import com.ninerevents.model.CalendarEvent;
 import com.ninerevents.model.Event;
 
 public interface EventDAO {
+
 	/**
 	 * This is the method to be used to initialize database resources ie.
 	 * connection.

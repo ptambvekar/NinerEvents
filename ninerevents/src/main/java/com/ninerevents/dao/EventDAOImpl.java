@@ -9,7 +9,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.ninerevents.model.CalendarEvent;
 import com.ninerevents.model.Event;
+
 import com.ninerevents.utils.CalenderEventMapper;
+
 import com.ninerevents.utils.EventMapper;
 
 public class EventDAOImpl implements EventDAO {
@@ -27,6 +29,18 @@ public class EventDAOImpl implements EventDAO {
 		return events;
 	}
 	
+
+	public Event EventDetails(String id) {
+		String SQL = "SELECT e.event_name,e.description,e.event_date,e.start_time,p.first_name,p.last_name, p.email_address,v.venue_name,pp.phone_no from Event e inner join Venue v on e.venue_id = v.id " + 
+				"inner join person p on e.host_id = p.id " + 
+				"inner join personphone pp on p.id = pp.person_id where e.id = 2";
+		jdbcTemplateObject = new JdbcTemplate(dataSource);
+		Event eventDetail = jdbcTemplateObject.queryForObject(SQL, new EventDetailMapper());
+		return eventDetail;
+	}
+
+	
+
 	public List<Event> listImpEvents() {
 		String SQL = "SELECT * FROM Event WHERE imp_flag = 'imp'";
 		jdbcTemplateObject = new JdbcTemplate(dataSource);
@@ -53,7 +67,7 @@ public class EventDAOImpl implements EventDAO {
 		});
 	}
 
-	
+
 	public List<CalendarEvent> getMonthlyEvents(Date startDate, Date endDate) {
 		String SQL = "select * from event where event_date between ? and ?";
 		jdbcTemplateObject = new JdbcTemplate(dataSource);

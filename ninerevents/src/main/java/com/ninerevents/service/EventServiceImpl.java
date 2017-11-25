@@ -71,5 +71,11 @@ public class EventServiceImpl implements EventsService{
 
 
 
+
+	@Override
+	public Event eventDetail(String id) {
+		// TODO Auto-generated method stub
+			return eventJDBCTemplate.EventDetails(id);
 	
+	}
 }

@@ -14,6 +14,7 @@ import com.ninerevents.model.Event;
 public interface EventsService {
 	
 	public Map<Date, List<Event>> upcomingEvents();
+	public Event eventDetail(String id);
 	//THis list of events will come from DAO layer (via service layer).
 
 	public List<CalendarEvent> getMonthlyEvents(Date startDate, Date endDate);

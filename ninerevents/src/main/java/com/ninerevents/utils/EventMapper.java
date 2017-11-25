@@ -22,7 +22,11 @@ public class EventMapper implements RowMapper<Event>
     	event.setStart_time(rs.getTime("start_time"));
     	event.setEnd_time(rs.getTime("end_time"));
     	event.setDay_of_week(rs.getString("day_of_week"));
+    	event.setEventDescription(rs.getString("description"));
+    	
 
         return event;
+        
+      
     }
 }

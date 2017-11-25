@@ -74,6 +74,7 @@ $(function() {
 		  dataType: 'json'
 		});
 	
+
 	$.ajax({
 		  url: 'webapi/event/importantEvents',
 		  success: importantEventsSuccess,
@@ -91,7 +92,6 @@ $(function() {
 		  },
 		  dataType: 'json'
 		});
-	
 	
 	
 });
