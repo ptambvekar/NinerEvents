@@ -55,7 +55,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="html/browse_events_page.html">
                                 <i class="material-icons md-18">date_range</i>
                                 Events
                             </a>
@@ -71,73 +71,9 @@
                         Featured
                     </strong>
                 </div>
-                <div class="card-body">
-                    <div class = "row">
-                        <div class = "col-sm-4 col-md-4 col-xs-12">
-                            <div class="card text-center">
-                                <div class="card-header">
-                                    EVENT 1
-                                </div>
-
-                                <div class="card-body">
-                                    <h4 class="card-title">
-                                        EVENT 1 Tag Line
-                                    </h4>
-
-                                    <p class = "card-text">
-                                        Event 1 Detals
-                                    </p>
-                                </div>
-
-                                <div class="card-footer text-muted">
-                                    <a href="#" class="btn btn-primary">Register</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class = "col-sm-4 col-md-4 col-xs-12">
-                            <div class="card text-center">
-                                <div class="card-header">
-                                    EVENT 2
-                                </div>
-
-                                <div class="card-body">
-                                    <h4 class="card-title">
-                                        EVENT 2 Tag Line
-                                    </h4>
-
-                                    <p class = "card-text">
-                                        Event 2 Detals
-                                    </p>
-                                </div>
-
-                                <div class="card-footer text-muted">
-                                    <a href="#" class="btn btn-primary">Register</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class = "col-sm-4 col-md-4 col-xs-12">
-                            <div class="card text-center">
-                                <div class="card-header">
-                                    EVENT 3
-                                </div>
-
-                                <div class="card-body">
-                                    <h4 class="card-title">
-                                        EVENT 3 Tag Line
-                                    </h4>
-
-                                    <p class = "card-text">
-                                        Event 3 Detals
-                                    </p>
-                                </div>
-
-                                <div class="card-footer text-muted">
-                                    <a href="#" class="btn btn-primary">Register</a>
-                                </div>
-                            </div>
-                        </div>
+                <div class="card-body card-warning">
+                    <div id = "featuredEvents"   class = "row">
+                        
                     </div>
                 </div>
             </div>
@@ -154,6 +90,10 @@
                         <div class = "card-body">
                             <div id="datepicker" data-date="<% new java.util.Date(); %>"></div>
                             <span id="datepicker"></span>
+                        </div>
+                        
+                        <div class="card-footer text-muted">
+                        	<a href="html/add_event_page.html" class="btn btn-primary">Create Event</a>
                         </div>
                     </div>
                 </aside>
@@ -175,8 +115,8 @@
                             Important Events
                         </p>
 
-                        <div class = "card-body">
-                            Important Events Table goes here
+                        <div>
+                           <table id="importantEvents" class = "table"></table>
                         </div>
                     </div>
                 </aside>

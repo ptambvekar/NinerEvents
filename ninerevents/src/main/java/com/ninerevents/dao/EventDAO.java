@@ -14,20 +14,25 @@ import com.ninerevents.model.CalendarEvent;
 import com.ninerevents.model.Event;
 
 public interface EventDAO {
-   /** 
-      * This is the method to be used to initialize
-      * database resources ie. connection.
-   */
-   public void setDataSource(DataSource ds);
-   
-   /** 
-      * This is the method to be used to list down
-      * all the records from the Event table.
-   */
-   
-   public List<Event> listEvents();
+	/**
+	 * This is the method to be used to initialize database resources ie.
+	 * connection.
+	 */
+	public void setDataSource(DataSource ds);
 
-public List<CalendarEvent> getMonthlyEvents(Date startDate, Date endDate);
- 
-   
+	/**
+	 * This is the method to be used to list down all the records from the Event
+	 * table.
+	 */
+
+	public List<Event> listEvents();
+
+	public List<CalendarEvent> getMonthlyEvents(Date startDate, Date endDate);
+
+	public List<Event> listImpEvents();
+
+	public List<Event> listFeaturedEvents();
+
+	public void insertEvents(Event event);
+
 }
