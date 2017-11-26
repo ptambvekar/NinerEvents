@@ -14,24 +14,20 @@ public interface EventDAO {
       * This is the method to be used to initialize
       * database resources ie. connection.
    */
-   public void setDataSource(DataSource ds);
+    public void setDataSource(DataSource ds);
    
    /** 
       * This is the method to be used to list down
       * all the records from the Event table.
    */
    
-   public List<Event> listEvents();
+    public List<Event> listEvents();
 
-  
-  public Event EventDetails(String id);
+    public Event EventDetails(String id);
 
-   public List<Event> listImpEvents();
-   
-   public List<Event> listFeaturedEvents();
-   
-   public void insertEvents(Event event);
+    public List<Event> listImpEvents();
 
- 
-   
+    public List<Event> listFeaturedEvents();
+
+    public void insertEvents(Event event);  
 }

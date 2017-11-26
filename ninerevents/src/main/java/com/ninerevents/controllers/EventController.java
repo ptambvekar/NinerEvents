@@ -80,6 +80,13 @@ public class EventController {
 		service.addEvent(event);
 	}
 	
+	@Path(value="registerEvent")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
 	
+	@POST
+	public void registerEvent(Event event){		
+		//creation of this list will be in service layer
+	}
 
 }

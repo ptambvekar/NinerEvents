@@ -195,11 +195,11 @@
 				var email = $("#inputEmail").val();
 				var firstname = $("#firstname").val();
 				var lastname = $("#lastname").val();
-				var address = $("#inputAddress");
-				var address2 = $("#inputAddress2");
-				var city = $("#inputCity");
-				var state = $("#inputState");
-				var zip = $("#inputZip");
+				var address = $("#inputAddress").val();
+				var address2 = $("#inputAddress2").val();
+				var city = $("#inputCity").val();
+				var state = $("#inputState").val();
+				var zip = $("#inputZip").val();
 
 				var dataString = {
 					"inputEmail":email,
@@ -211,7 +211,18 @@
 					"state":state,
 					"zip":zip,
 					"country":"United States"
-				}
+				};
+
+				$.ajax({
+					type:"POST",
+					url:"/ninerevents/webapi/event/registerEvent",
+					contentType: "application/json",
+			       	data: JSON.stringify(dataString),
+			       	dataType:"json",
+					success:function(){
+
+					}
+				});
 
 				console.log(dataString);
 			}
