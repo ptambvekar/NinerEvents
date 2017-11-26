@@ -15,8 +15,8 @@ public class CalenderEventMapper implements RowMapper<CalendarEvent>
     	CalendarEvent event=new CalendarEvent();
     	event.setId(rs.getString("id"));
     	event.setTitle(rs.getString("event_name"));
-    	event.setStart(rs.getDate("event_date").toString());
-    	event.setEnd(rs.getDate("event_date").toString());
+    	event.setStart(rs.getTimestamp("event_start").toString());
+    	event.setEnd(rs.getTimestamp("event_end").toString());
     	event.setUrl("");
         return event;
     }

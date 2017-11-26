@@ -70,7 +70,7 @@ public class EventDAOImpl implements EventDAO {
 
 
 	public List<CalendarEvent> getMonthlyEvents(Date startDate, Date endDate) {
-		String SQL = "select * from event where event_date between ? and ?";
+		String SQL = "select * from event where event_start between ? and ?";
 		jdbcTemplateObject = new JdbcTemplate(dataSource);
 		List<CalendarEvent> events = jdbcTemplateObject.query(SQL, new Object[] {startDate,endDate},new CalenderEventMapper());
 		return events;

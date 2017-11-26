@@ -78,7 +78,7 @@ $(function() {
 							left : 'prev',
 							center : 'title',
 							right : 'today,month,basicWeek,basicDay,next',
-							backgroundColor : 'lightblue'
+							backgroundColor : '#6495ED'
 						},
 						events : function(start, end, timezone, callback) {
 							// Check if the default start date is 1st of the
