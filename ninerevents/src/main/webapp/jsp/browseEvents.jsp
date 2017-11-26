@@ -68,7 +68,7 @@ body {
 <body>
 	<!-- Navigation Bar BEGIN -->
 	<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-		<a class="navbar-brand" href="#">Niner Events</a>
+		<a class="navbar-brand" href="/ninerevents/">Niner Events</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarCollapse" aria-controls="navbarCollapse"
 			aria-expanded="false" aria-label="Toggle navigation">
@@ -77,7 +77,7 @@ body {
 
 		<div class="collapse navbar-collapse" id="navbarCollapse">
 			<ul class="nav navbar-nav ml-auto">
-				<li class="nav-item"><a class="nav-link" href="#"> <i
+				<li class="nav-item"><a class="nav-link" href="../index.jsp"> <i
 						class="material-icons md-18">home</i> Home
 				</a></li>
 				<li class="nav-item active"><a class="nav-link" href="#"> <i
@@ -99,7 +99,7 @@ body {
 						<div class="form-group">
 							<div class="input-group">
 								<input class="form-control" type="text"
-									placeholder="Enter search keyword" />
+									placeholder="Enter search keyword" required="required"/>
 								<div class="input-group-addon">
 									<i class="material-icons">search</i>
 								</div>
@@ -112,9 +112,7 @@ body {
 					<div class="col-md-2">
 						<div class="form-group">
 							<select id="input-event" class="form-control">
-								<option>Event Type</option>
-								<option>Type1</option>
-								<option>Type2</option>
+								
 							</select>
 						</div>
 					</div>
@@ -122,9 +120,7 @@ body {
 					<div class="col-md-2">
 						<div class="form-group">
 							<select id="input-venue" class="form-control">
-								<option>Event Venue</option>
-								<option>Venue1</option>
-								<option>Venue2</option>
+								
 							</select>
 						</div>
 					</div>
@@ -187,51 +183,6 @@ body {
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.6.2/fullcalendar.min.js"></script>
 
-	<script>
-            $(function() {
-            
-            	var getEvents=function(){
-            		
-            	}
-			$("#fullCalendar").fullCalendar({
-				themeSystem : 'standard',
-				allDayDefault:false,
-				aspectRatio:1.7,
-				cache:true,
-				eventBackgroundColor:'lightblue',
-				fixedWeekCount:false, 
-				header : {
-					left : 'prev',
-					center : 'title',
-					right : 'today ,next',
-					backgroundColor:'lightblue'
-				},
-				events:function(start,end,timezone,callback){
-					// Check if the default start date is 1st of the month or not. 
-					if (1!=start.get('date')){// if not, that means the calendar shows some days from previous month in the calendar.
-						start.add('1','months') //hence go to next month first, and then LATER, calculate start date and end date of that month
-					}
-					var today=$("#fullCalendar").fullCalendar('getDate')
-					
-					dataToSend={//we want to load only future events and hence set start date as current date if the 'start' is in current month.
-						startDate:today.isSame(start,'month') ? today.format("YYYY-MM-DD HH:mm:ss").toString() :start.startOf('month').format("YYYY-MM-DD HH:mm:ss").toString(),
-						endDate:start.endOf('month').format("YYYY-MM-DD HH:mm:ss").toString()
-					}
-					
-					$.post({
-						url:'/ninerevents/webapi/event/monthlyEvents',
-						data:JSON.stringify(dataToSend),
-						dataType:'json',
-						contentType:'application/json',
-						success:function(resp){
-							callback(resp);
-						}
-					});
-					
-				}
-			});
-
-		});
-        </script>
+	<script type="text/javascript" src="../js/eventbrowser.js"></script>
 </body>
 </html>

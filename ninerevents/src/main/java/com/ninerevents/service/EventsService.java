@@ -6,6 +6,8 @@ import java.util.Map;
 
 import com.ninerevents.model.CalendarEvent;
 import com.ninerevents.model.Event;
+import com.ninerevents.model.EventCategory;
+import com.ninerevents.model.EventLocation;
 
 /*
  * A class containing logic related to the events
@@ -26,5 +28,8 @@ public interface EventsService {
 
 	public void addEvent(Event event);
 
+	public List<EventLocation> getEventLocations();
+	
+	public List<EventCategory> getEventTypes();
 
 }

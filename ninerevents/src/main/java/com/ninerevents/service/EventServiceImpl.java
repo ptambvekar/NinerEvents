@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 import com.ninerevents.dao.EventDAO;
 import com.ninerevents.model.CalendarEvent;
 import com.ninerevents.model.Event;
+import com.ninerevents.model.EventCategory;
+import com.ninerevents.model.EventLocation;
 
 @Service
 public class EventServiceImpl implements EventsService{
@@ -69,13 +71,22 @@ public class EventServiceImpl implements EventsService{
 		eventJDBCTemplate.insertEvents(event);
 	}
 
-
+	@Override
+	public Event eventDetail(String id) {
+		
+			return eventJDBCTemplate.EventDetails(id);
+	
+	}
 
 
 	@Override
-	public Event eventDetail(String id) {
-		// TODO Auto-generated method stub
-			return eventJDBCTemplate.EventDetails(id);
-	
+	public List<EventLocation> getEventLocations() {
+		return eventJDBCTemplate.getEventLocations();
+	}
+
+
+	@Override
+	public List<EventCategory> getEventTypes() {
+		return eventJDBCTemplate.getEventType();
 	}
 }

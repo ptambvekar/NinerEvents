@@ -48,7 +48,7 @@
     <body>
         <!-- Navigation Bar BEGIN -->
         <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-			<a class="navbar-brand" href="#">Niner Events</a>
+			<a class="navbar-brand" href="/ninerevents/">Niner Events</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
@@ -56,13 +56,13 @@
 			<div class="collapse navbar-collapse" id="navbarCollapse">
 				<ul class="nav navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="/ninerevents/">
                             <i class="material-icons md-18">home</i>
                             Home
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="browseEvents.jsp">
                             <i class="material-icons md-18">date_range</i>
                             Events
                         </a>
@@ -84,7 +84,7 @@
 
                     <br/>
 
-                    <a href="#" class="btn btn-outline-primary btn-primary btn-lg" role="button">
+                    <a href="browseEvents.jsp" class="btn btn-outline-primary btn-primary btn-lg" role="button">
                         Browse All Events
                     </a>
                     <!-- Browse All Events Button - END -->
@@ -146,9 +146,14 @@
 		                
 					$('#eventDetail').append(sResult);
 			}
-			
+		 	var search=window.location.search?window.location.search:"";
+ 	  		var eventId=search.split('?event=')[1] ? search.split('?event=')[1] : null;
+ 	  		if(!eventId){
+ 	  			console.error('wrong event id in the url ',window.location.search);
+ 	  			//return;
+ 	  		}
 			$.ajax({
-				  url: '/ninerevents/webapi/event/eventDetail',
+				  url: '/ninerevents/webapi/event/eventDetail?event='+eventId,
 				  success: eventDetailSuccess,
 				  error:function(resp){
 					  console && console.log('Error in geting upcoming events:',resp);

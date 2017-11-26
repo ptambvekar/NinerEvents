@@ -41,7 +41,7 @@
 
     <body>
         <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-            <a class="navbar-brand" href="#">Niner Events</a>
+            <a class="navbar-brand" href="/ninerevents/">Niner Events</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -55,7 +55,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="html/browse_events_page.html">
+                            <a class="nav-link" href="jsp/browseEvents.jsp">
                                 <i class="material-icons md-18">date_range</i>
                                 Events
                             </a>

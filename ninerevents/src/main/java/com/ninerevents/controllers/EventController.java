@@ -20,6 +20,8 @@ import org.springframework.stereotype.Component;
 import com.ninerevents.model.CalendarEvent;
 import com.ninerevents.model.CalendarEventsRequest;
 import com.ninerevents.model.Event;
+import com.ninerevents.model.EventCategory;
+import com.ninerevents.model.EventLocation;
 import com.ninerevents.service.EventsService;
 
 
@@ -59,7 +61,7 @@ public class EventController {
 	@Path(value="eventDetail")
 	@Produces(MediaType.APPLICATION_JSON)
 	@GET
-	public Event eventDetail(@QueryParam("event_id") String id  ){		
+	public Event eventDetail(@QueryParam("event") String id  ){		
 		//creation of this map will be in service layer
 		Event eventDetail = service.eventDetail(id);
 		
@@ -87,12 +89,30 @@ public class EventController {
 	
 	@Path(value="addEvent")
 	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
-	
+	@Consumes(MediaType.APPLICATION_JSON)	
 	@POST
 	public void addEvent(Event event){		
 		//creation of this list will be in service layer
 		service.addEvent(event);
+	}
+	
+	
+	@Path(value="eventLocations")
+	@Produces(MediaType.APPLICATION_JSON)
+	@GET
+	public List<EventLocation> getLocations(){		
+		//creation of this list will be in service layer
+		List<EventLocation> eventsList = service.getEventLocations();
+		return eventsList;
+	}
+	
+	@Path(value="eventTypes")
+	@Produces(MediaType.APPLICATION_JSON)
+	@GET
+	public List<EventCategory> getEventTypes(){		
+		//creation of this list will be in service layer
+		List<EventCategory> eventsList = service.getEventTypes();
+		return eventsList;
 	}
 
 }

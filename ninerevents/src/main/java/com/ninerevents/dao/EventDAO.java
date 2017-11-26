@@ -12,6 +12,8 @@ import javax.sql.DataSource;
 
 import com.ninerevents.model.CalendarEvent;
 import com.ninerevents.model.Event;
+import com.ninerevents.model.EventCategory;
+import com.ninerevents.model.EventLocation;
 
 public interface EventDAO {
 
@@ -35,5 +37,12 @@ public interface EventDAO {
 	public List<Event> listFeaturedEvents();
 
 	public void insertEvents(Event event);
+	
+	public Event EventDetails(String id); 
+
+	/* method to populate drop-downs */ 
+	public List<EventLocation> getEventLocations();
+	
+	public List<EventCategory> getEventType();
 
 }
