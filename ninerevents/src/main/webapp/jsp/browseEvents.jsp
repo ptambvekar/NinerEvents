@@ -93,12 +93,12 @@ body {
 
 	<div class="row container-adjust">
 		<div class="col">
-			<form class="form">
+			<form id="searchForm" class="form">
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
 							<div class="input-group">
-								<input class="form-control" type="text"
+								<input name="keyword" class="form-control" type="text"
 									placeholder="Enter search keyword" required="required"/>
 								<div class="input-group-addon">
 									<i class="material-icons">search</i>
@@ -111,7 +111,7 @@ body {
 
 					<div class="col-md-2">
 						<div class="form-group">
-							<select id="input-event" class="form-control">
+							<select name="eventCategory" id="input-event" class="form-control">
 								
 							</select>
 						</div>
@@ -119,7 +119,7 @@ body {
 
 					<div class="col-md-2">
 						<div class="form-group">
-							<select id="input-venue" class="form-control">
+							<select name="eventLocation" id="input-venue" class="form-control">
 								
 							</select>
 						</div>

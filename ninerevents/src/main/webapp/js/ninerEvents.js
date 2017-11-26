@@ -19,7 +19,7 @@ $(function() {
 			var sResult = '';
 			$.each(data,function(date,events){
 				sResult += '<thead class="thead-light"><tr><th colspan="2">';
-				sResult += moment(date).format('LL')+ '</th> </tr> </thead><tbody>';
+				sResult += moment(date).format('LL') + '</th> </tr> </thead><tbody>';
 				events.forEach(function(event){
 					sResult += '<tr><td class="col-*-6"> <a href="/ninerevents/jsp/EventDetail.jsp?event='+event.eventId+'" >' + event.eventName + '</a></td>';
 					sResult += '<td class="col-*-6">' + moment(event.start_time,'HH:mm:ss').format('HH:mm A')+ '</td> </tr>';
@@ -56,10 +56,10 @@ $(function() {
 		}
 			var sResult = '';
 			data.forEach(function(event){
-					sResult += '<div class = "col-sm-4 col-md-4 col-xs-12"><div class="card text-center"><div class="card-header bg-primary">';
+					sResult += '<div class = "col-sm-4 col-md-4 col-xs-12"><div class="card text-center"><div class="card-header bg-primary text-white">';
 					sResult += '<th align = "center">' + event.eventName + '</th>';
-					sResult += '</div><div class="card-body bg-light h-200"><h5 class="card-title">';
-				    sResult += event.eventDescription + '</h4><p class = "card-text">' + event.event_date;
+					sResult += '</div><div class="card-body bg-light h-200"><h6 class="card-title">';
+				    sResult += event.eventDescription + '</h6><hr/><p class = "card-text">' + moment(event.event_date).format('LL');
 				    sResult += '</p></div><div class="card-footer text-muted"><a href="/ninerevents/jsp/EventDetail.jsp?event='+event.eventId+'" class="btn btn-primary">Register</a></div></div></div>'
 			});
 			$('#featuredEvents').append(sResult);

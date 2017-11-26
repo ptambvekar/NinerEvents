@@ -9,11 +9,13 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.mysql.jdbc.StringUtils;
 import com.ninerevents.dao.EventDAO;
 import com.ninerevents.model.CalendarEvent;
 import com.ninerevents.model.Event;
 import com.ninerevents.model.EventCategory;
 import com.ninerevents.model.EventLocation;
+import com.ninerevents.model.SearchRequest;
 
 @Service
 public class EventServiceImpl implements EventsService{
@@ -30,7 +32,7 @@ public class EventServiceImpl implements EventsService{
 		eventsList = eventJDBCTemplate.listEvents();
 		//logic to seperate the list by event-date.
 		for(Event e:eventsList) {
-			Date eventDate=e.getEvent_date();
+			Date eventDate=e.getStartDateTime();
 			if(!eventsMap.containsKey(eventDate)) {
 				List <Event> eventsList1= new ArrayList<Event>();
 				eventsList1.add(e);
@@ -89,4 +91,20 @@ public class EventServiceImpl implements EventsService{
 	public List<EventCategory> getEventTypes() {
 		return eventJDBCTemplate.getEventType();
 	}
+
+
+	@Override
+	public List<CalendarEvent> getSearchResults(SearchRequest request) {
+		String location= "Any".equals(request.getEventLocation()) ? null:request.getEventLocation(); 
+		String category= "Any".equals(request.getEventCategory()) ? null:request.getEventCategory();
+		String keyword= request.getKeyword();
+		if(StringUtils.isNullOrEmpty(keyword) || StringUtils.isEmptyOrWhitespaceOnly(keyword)) {
+			
+			return null;
+		}
+		
+		return eventJDBCTemplate.getSearchResults(keyword,location,category);
+	}
+	
+	
 }

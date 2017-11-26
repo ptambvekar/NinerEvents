@@ -14,6 +14,7 @@ import com.ninerevents.model.CalendarEvent;
 import com.ninerevents.model.Event;
 import com.ninerevents.model.EventCategory;
 import com.ninerevents.model.EventLocation;
+import com.ninerevents.model.SearchRequest;
 
 public interface EventDAO {
 
@@ -45,4 +46,6 @@ public interface EventDAO {
 	
 	public List<EventCategory> getEventType();
 
+	public List<CalendarEvent> getSearchResults(String keyword,String location,String category);
+	
 }

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 25, 2017 at 08:03 AM
+-- Generation Time: Nov 26, 2017 at 10:27 PM
 -- Server version: 5.6.21
 -- PHP Version: 5.5.19
 
@@ -87,11 +87,9 @@ CREATE TABLE IF NOT EXISTS `event` (
 `id` int(10) NOT NULL,
   `event_name` varchar(20) NOT NULL,
   `description` varchar(200) DEFAULT NULL,
-  `event_date` date DEFAULT NULL,
-  `end_date` date NOT NULL,
-  `start_time` time DEFAULT NULL,
-  `end_time` time DEFAULT NULL,
-  `day_of_week` enum('Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday') DEFAULT NULL,
+  `category_id` int(11) DEFAULT NULL,
+  `event_start` datetime NOT NULL,
+  `event_end` datetime NOT NULL,
   `venue_id` int(10) DEFAULT NULL,
   `imp_flag` varchar(10) DEFAULT NULL,
   `featured_flag` varchar(11) NOT NULL,
@@ -102,44 +100,17 @@ CREATE TABLE IF NOT EXISTS `event` (
 -- Dumping data for table `event`
 --
 
-INSERT INTO `event` (`id`, `event_name`, `description`, `event_date`, `end_date`, `start_time`, `end_time`, `day_of_week`, `venue_id`, `imp_flag`, `featured_flag`, `host_id`) VALUES
-(1, 'FoodFest', 'Enjoy the tastes of Charlotte, watch food skills demos and pick up fresh, delicious and real local food.', '2017-12-07', '0000-00-00', '17:30:00', '22:00:00', 'Thursday', 4, 'imp', '0', 1),
-(2, 'RecFest', 'Come kick off the school year in style!RecFest is open to the public and will feature free food from local vendors, music, games, sport club information/demonstrations, and give-aways! ', '2017-12-06', '0000-00-00', '09:00:00', '15:00:00', 'Wednesday', 7, NULL, '0', 2),
-(3, 'Career Carnival', 'Join us at the Career Carnival for food, prizes, and lots of games! Learn how your University Career Center can help you in your academic and career planning', '2017-12-28', '0000-00-00', '07:00:00', '11:00:00', 'Thursday', 3, 'imp', '0', 7),
-(4, 'Haunted Union', 'Experience the Student Union all decked out for Halloween. The Multipurpose Room will be transformed into a haunted maze that will be sure to scare you! ', '2018-01-16', '0000-00-00', '19:00:00', '23:00:00', 'Monday', 4, '', '0', 1),
-(5, 'Self Therapy Project', 'Our Self-therapy Project is based on the Cognitive Behavioral Therapy (CBT) group therapy manual. Students will develop skills to manage their stress and prevent depression in the future', '2018-01-03', '0000-00-00', '10:00:00', '14:00:00', 'Tuesday', 6, NULL, 'featured', 8),
-(6, 'MathsMiracles', 'Learn helpful tips to solve math problems quickly', '2017-12-16', '0000-00-00', '14:30:00', '18:30:00', 'Saturday', 5, NULL, '0', 6),
-(7, 'Military Appreciatio', 'The Charlotte 49ers take on Middle Tennessee Blue Raiders for the Military Appreciation Day football game.', '2017-12-30', '0000-00-00', '18:00:00', '21:00:00', 'Saturday', 1, NULL, 'featured', 7),
-(8, 'Workshop: I''m Stress', 'Increase your awareness of stress and how to minimize stressors in your lives.', '2017-11-15', '0000-00-00', '17:30:00', '20:00:00', 'Wednesday', 6, 'imp', '0', 5),
-(9, 'Bajo La Misma Luna C', 'Bajo La Misma Luna (Under the Same Moon) Charity Ball is an event the Epsilon Phi Chapter of Lambda Theta Alpha, hosts annually.This year we will have a masquearde theme, so make sure to dress formall', '2017-11-17', '0000-00-00', '19:00:00', '23:00:00', 'Friday', 1, NULL, 'featured', 2),
-(10, 'African Night', 'The 2017 African Night is a cultural showcase of everything Africa. This year, our theme will be Scary Movie Africa!', '2017-11-18', '0000-00-00', '20:00:00', '15:00:00', 'Saturday', 3, 'imp', '0', 8);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `eventcategory`
---
-
-CREATE TABLE IF NOT EXISTS `eventcategory` (
-  `event_id` int(10) DEFAULT NULL,
-  `category_id` int(10) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `eventcategory`
---
-
-INSERT INTO `eventcategory` (`event_id`, `category_id`) VALUES
-(1, 7),
-(2, 2),
-(3, 3),
-(4, 7),
-(5, 4),
-(6, 3),
-(7, 1),
-(8, 4),
-(9, 9),
-(10, 8);
+INSERT INTO `event` (`id`, `event_name`, `description`, `category_id`, `event_start`, `event_end`, `venue_id`, `imp_flag`, `featured_flag`, `host_id`) VALUES
+(1, 'FoodFest', 'Enjoy the tastes of Charlotte, watch food skills demos and pick up fresh, delicious and real local food.', 7, '2017-11-26 11:00:00', '2017-11-26 13:00:00', 4, 'imp', '0', 1),
+(2, 'RecFest', 'Come kick off the school year in style!RecFest is open to the public and will feature free food from local vendors, music, games, sport club information/demonstrations, and give-aways! ', 2, '2017-11-27 14:00:00', '2017-11-27 18:00:00', 7, NULL, '0', 2),
+(3, 'Career Carnival', 'Join us at the Career Carnival for food, prizes, and lots of games! Learn how your University Career Center can help you in your academic and career planning', 3, '2017-11-28 17:00:00', '2017-11-28 20:00:00', 3, 'imp', '0', 7),
+(4, 'Haunted Union', 'Experience the Student Union all decked out for Halloween. The Multipurpose Room will be transformed into a haunted maze that will be sure to scare you! ', 7, '2017-11-29 08:45:00', '2017-11-29 11:00:00', 4, '', '0', 1),
+(5, 'Self Therapy Project', 'Our Self-therapy Project is based on the Cognitive Behavioral Therapy (CBT) group therapy manual. Students will develop skills to manage their stress and prevent depression in the future', 4, '2017-11-29 09:00:00', '2017-11-29 16:00:00', 6, NULL, 'featured', 8),
+(6, 'MathsMiracles', 'Learn helpful tips to solve math problems quickly', 3, '2017-12-06 18:00:00', '2017-12-07 12:00:00', 5, NULL, '0', 6),
+(7, 'Military Appreciatio', 'The Charlotte 49ers take on Middle Tennessee Blue Raiders for the Military Appreciation Day football game.', 1, '2017-12-11 14:00:00', '2017-12-11 17:00:00', 1, NULL, 'featured', 7),
+(8, 'Workshop: I''m Stress', 'Increase your awareness of stress and how to minimize stressors in your lives.', 4, '2017-12-20 10:00:00', '2017-12-20 13:00:00', 6, 'imp', '0', 5),
+(9, 'Bajo La Misma Luna C', 'Bajo La Misma Luna (Under the Same Moon) Charity Ball is an event the Epsilon Phi Chapter of Lambda Theta Alpha, hosts annually.This year we will have a masquearde theme, so make sure to dress formall', 9, '2017-12-04 15:00:00', '2017-12-04 17:00:00', 1, NULL, 'featured', 2),
+(10, 'African Night', 'The 2017 African Night is a cultural showcase of everything Africa. This year, our theme will be Scary Movie Africa!', 8, '2018-01-15 14:00:00', '2018-01-15 16:00:00', 3, 'imp', '0', 8);
 
 -- --------------------------------------------------------
 
@@ -170,7 +141,6 @@ INSERT INTO `guest` (`other_id`, `guest_id`) VALUES
 
 CREATE TABLE IF NOT EXISTS `person` (
 `id` int(10) NOT NULL,
-  `username` varchar(15) NOT NULL,
   `first_name` varchar(12) NOT NULL,
   `last_name` varchar(12) DEFAULT NULL,
   `line1` varchar(35) NOT NULL,
@@ -185,20 +155,20 @@ CREATE TABLE IF NOT EXISTS `person` (
 -- Dumping data for table `person`
 --
 
-INSERT INTO `person` (`id`, `username`, `first_name`, `last_name`, `line1`, `line2`, `city`, `state`, `zip`, `email_address`) VALUES
-(1, 'AndyA', 'Andy', 'Alec', '9527 University Terrace Drive', 'Apt F', 'Charlotte', 'North Carolina', 28262, 'AndyAlec@uncc.edu'),
-(2, 'HarveyH', 'Harvey', 'Specter', '9544 University Terrace Drive', 'Wallis Lane', 'Charlotte', 'North Carolina', 28262, 'HarveySpecter@uncc.edu'),
-(3, 'MikeR', 'Mike', 'Ross', '9544 University Terrace Drive', 'Apt F', 'Charlotte', 'North Carolina', 28262, 'MikeRoss@uncc.edu'),
-(4, 'RachelG', 'Rachel', 'Green', '9544 University Terrace Drive', 'Apt A', 'Charlotte', 'North Carolina', 28262, 'RachelGreen@uncc.edu'),
-(5, 'TinaT', 'Tina', 'Tisco', '926 Spring Mist Court', 'Apt K', 'Sugar Land', 'Texas', 77479, 'TinaTisco@uncc.edu'),
-(6, 'NessW', 'Ness', 'Wadia', '10004 Graduate Ln Apt B', NULL, 'Charlotte', 'North Carolina', 28262, 'NessWadia@uncc.edu'),
-(7, 'ChandlerB', 'Chandler', 'Bing', '10004 Graduate Ln Apt B', '8th Street West\n', 'Charlotte', 'North Carolina', 28262, 'ChandlerBing@uncc.edu'),
-(8, 'MonikaG', 'Monika', 'Geller', '10004 Graduate Ln Apt B', 'Circle Drive', 'Charlotte', 'North Carolina', 28262, 'MonikaGeller@uncc.edu'),
-(9, 'SansaS', 'Sansa', 'Stark', '10004 Graduate Ln Apt B', NULL, 'Charlotte', 'North Carolina', 28262, 'SansaStark@uncc.edu'),
-(10, 'RichieT', 'Richie', 'Thomas', '209 Barton Creek Drive ', 'Oxford Court', 'Charlotte', 'North Carolina', 28262, 'RichieThomas@uncc.edu'),
-(11, 'MCjames', 'James', 'McEntire', '345 North Jennings Street', 'Center Street', 'Alabaster', 'Albama', 35007, 'James.Mce@gmail.com'),
-(12, 'Thomp', 'Mark', 'Thompson', '947 Beach Court', 'Apartment G', 'Neenah', 'Wisconson', 54956, 'MarkAThompson@teleworm.us'),
-(13, 'Wlisa', 'Lisa', 'Williams', '8 Fawn Drive ', 'Mecklenberg County', 'Baton Rouge', 'Los Angeles', 70806, 'LisaTWilliams@jourrapide.com');
+INSERT INTO `person` (`id`, `first_name`, `last_name`, `line1`, `line2`, `city`, `state`, `zip`, `email_address`) VALUES
+(1, 'Andy', 'Alec', '9527 University Terrace Drive', 'Apt F', 'Charlotte', 'North Carolina', 28262, 'AndyAlec@uncc.edu'),
+(2, 'Harvey', 'Specter', '9544 University Terrace Drive', 'Wallis Lane', 'Charlotte', 'North Carolina', 28262, 'HarveySpecter@uncc.edu'),
+(3, 'Mike', 'Ross', '9544 University Terrace Drive', 'Apt F', 'Charlotte', 'North Carolina', 28262, 'MikeRoss@uncc.edu'),
+(4, 'Rachel', 'Green', '9544 University Terrace Drive', 'Apt A', 'Charlotte', 'North Carolina', 28262, 'RachelGreen@uncc.edu'),
+(5, 'Tina', 'Tisco', '926 Spring Mist Court', 'Apt K', 'Sugar Land', 'Texas', 77479, 'TinaTisco@uncc.edu'),
+(6, 'Ness', 'Wadia', '10004 Graduate Ln Apt B', NULL, 'Charlotte', 'North Carolina', 28262, 'NessWadia@uncc.edu'),
+(7, 'Chandler', 'Bing', '10004 Graduate Ln Apt B', '8th Street West\n', 'Charlotte', 'North Carolina', 28262, 'ChandlerBing@uncc.edu'),
+(8, 'Monika', 'Geller', '10004 Graduate Ln Apt B', 'Circle Drive', 'Charlotte', 'North Carolina', 28262, 'MonikaGeller@uncc.edu'),
+(9, 'Sansa', 'Stark', '10004 Graduate Ln Apt B', NULL, 'Charlotte', 'North Carolina', 28262, 'SansaStark@uncc.edu'),
+(10, 'Richie', 'Thomas', '209 Barton Creek Drive ', 'Oxford Court', 'Charlotte', 'North Carolina', 28262, 'RichieThomas@uncc.edu'),
+(11, 'James', 'McEntire', '345 North Jennings Street', 'Center Street', 'Alabaster', 'Albama', 35007, 'James.Mce@gmail.com'),
+(12, 'Mark', 'Thompson', '947 Beach Court', 'Apartment G', 'Neenah', 'Wisconson', 54956, 'MarkAThompson@teleworm.us'),
+(13, 'Lisa', 'Williams', '8 Fawn Drive ', 'Mecklenberg County', 'Baton Rouge', 'Los Angeles', 70806, 'LisaTWilliams@jourrapide.com');
 
 -- --------------------------------------------------------
 
@@ -409,7 +379,7 @@ ALTER TABLE `guest`
 -- Indexes for table `person`
 --
 ALTER TABLE `person`
- ADD PRIMARY KEY (`id`,`username`), ADD UNIQUE KEY `id` (`id`);
+ ADD PRIMARY KEY (`id`,`email_address`), ADD UNIQUE KEY `id` (`id`);
 
 --
 -- Indexes for table `personlogin`

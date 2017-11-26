@@ -3,7 +3,7 @@
  */
 
 $(function() {
-	
+	//populate Locations options
 	$.get({
 		url:'/ninerevents/webapi/event/eventLocations',
 		success: function(response){
@@ -13,9 +13,9 @@ $(function() {
 			}
 			
 			var categoryDropDown=$('#input-venue');
-			htmlstring="<option label=''>Any</option>";
+			htmlstring="<option label=' '>Any</option>";
 			response.forEach(function(location){
-				htmlstring += "<option value=' "+location.id +" '>"+location.venueName+"</option>"
+				htmlstring += "<option value='"+location.id +"'>"+location.venueName+"</option>"
 			});
 			categoryDropDown.append(htmlstring);
 			
@@ -24,7 +24,7 @@ $(function() {
 			  console && console.log('Error in geting location dropdown:',resp);
 		},
 	});
-
+	//populate Category options
 	$.get({
 		url:'/ninerevents/webapi/event/eventTypes',
 		success: function(response){
@@ -34,9 +34,9 @@ $(function() {
 			}
 			
 			var categoryDropDown=$('#input-event');
-			htmlstring="<option label=''>Any</option>";
+			htmlstring="<option label=' '>Any</option>";
 			response.forEach(function(category){
-				htmlstring += "<option value=' "+category.id +" '>"+category.categoryName+"</option>"
+				htmlstring += "<option value='"+category.id +"'>"+category.categoryName+"</option>"
 			});
 			categoryDropDown.append(htmlstring);
 			
@@ -45,6 +45,28 @@ $(function() {
 			  console && console.log('Error in geting category dropdown:',resp);
 		},
 	});
+	
+	
+	$('#searchForm').on('submit',function(e){
+		e.preventDefault();
+		var form=$(this)
+		var searchInputs=form.serializeArray();
+		var searchQuery={}
+		searchInputs.forEach(function(input){
+			searchQuery[input.name]=input.value
+		})
+		$.post({
+			url:'/ninerevents/webapi/event/searchresults',
+			data:JSON.stringify(searchQuery),
+			success:function(response){
+				console.log(response)
+			},
+			dataType:'json',
+			contentType:'application/json'
+		});
+		
+	});
+	
 	$("#fullCalendar")
 			.fullCalendar({
 						themeSystem : 'standard',
@@ -55,7 +77,7 @@ $(function() {
 						header : {
 							left : 'prev',
 							center : 'title',
-							right : 'today ,next',
+							right : 'today,month,basicWeek,basicDay,next',
 							backgroundColor : 'lightblue'
 						},
 						events : function(start, end, timezone, callback) {

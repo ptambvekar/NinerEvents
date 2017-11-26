@@ -8,6 +8,7 @@ import com.ninerevents.model.CalendarEvent;
 import com.ninerevents.model.Event;
 import com.ninerevents.model.EventCategory;
 import com.ninerevents.model.EventLocation;
+import com.ninerevents.model.SearchRequest;
 
 /*
  * A class containing logic related to the events
@@ -31,5 +32,7 @@ public interface EventsService {
 	public List<EventLocation> getEventLocations();
 	
 	public List<EventCategory> getEventTypes();
+	
+	public List<CalendarEvent> getSearchResults(SearchRequest request);
 
 }

@@ -13,14 +13,14 @@ public class EventDetailMapper implements RowMapper<Event>{
 	    {
 	    	Event event=new Event();
 	    	event.setEventName(rs.getString("event_name"));
-	    	event.setEvent_date(rs.getDate("event_date"));
-	    	event.setStart_time(rs.getTime("start_time"));
+	    	event.setStartDateTime(rs.getTimestamp("event_start"));
+	    	event.setEndDateTime(rs.getTimestamp("event_end"));
 	    	event.setEventDescription(rs.getString("description"));
-	    	event.setemail_address(rs.getString("email_address"));
-	    	event.setfirst_name(rs.getString("first_name"));
-	    	event.setlast_name(rs.getString("last_name"));
-	    	event.setphone_number(rs.getString("phone_no"));
-	    	event.setvenue_name(rs.getString("venue_name"));
+	    	event.setEmail_address(rs.getString("email_address"));
+	    	event.setFirst_name(rs.getString("first_name"));
+	    	event.setLast_name(rs.getString("last_name"));
+	    	event.setPhone_no(rs.getString("phone_no"));
+	    	event.setVenue_name(rs.getString("venue_name"));
 
 	        return event;
 	        
