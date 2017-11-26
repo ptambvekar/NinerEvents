@@ -86,7 +86,7 @@
 					<label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
 
 					<div class="form-group col-sm-4">
-						<input type="email" class="form-control" id="inputEmail" placeholder="Email">
+						<input type="email" class="form-control" id="inputEmail" placeholder="Email" required>
 					</div>
 				</div>
 
@@ -94,7 +94,7 @@
 					<label for="firstname" class="col-sm-2 col-form-label">First Name</label>
 				
 					<div class="col-sm-4">
-						<input type="text" class="form-control" id="firstname" placeholder="John"/>
+						<input type="text" class="form-control" id="firstname" placeholder="John" required/>
 					</div>
 				</div>
 
@@ -102,7 +102,7 @@
 					<label for="lastname" class="col-sm-2 col-form-label">Last Name</label>
 					
 					<div class="col-sm-4">
-						<input type="text" class="form-control" id="lastname" placeholder="Doe"/>
+						<input type="text" class="form-control" id="lastname" placeholder="Doe" required/>
 					</div>
 				</div>
 
@@ -110,7 +110,7 @@
 					<label for="inputAddress" class="col-sm-2 col-form-label">Address</label>
 
 					<div class="col-sm-10">
-						<input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+						<input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St" required>
 					</div>
 				</div>
 
@@ -126,7 +126,7 @@
 					<label for="inputCity" class="col-sm-2 col-form-label">City</label>
 
 					<div class="form-group col-md-4">
-						<input type="text" class="form-control" id="inputCity">
+						<input type="text" class="form-control" id="inputCity" required>
 					</div>
 				</div>
 
@@ -134,7 +134,7 @@
 					<label for="inputZip" class="col-sm-2 col-form-label">Zip</label>
 
 					<div class="form-group col-md-4">
-						<input type="number" class="form-control" id="inputZip">
+						<input type="number" class="form-control" id="inputZip" required>
 					</div>
 				</div>
 
@@ -142,7 +142,7 @@
 					<label for="inputState" class="col-sm-2 col-form-label">State</label>
 					
 					<div class="form-group col-md-4">
-						<select class="form-control bfh-states" data-country="US" id="inputState"></select>
+						<select class="form-control bfh-states" data-country="US" id="inputState" required></select>
 					</div>
 				</div>
 
@@ -167,7 +167,7 @@
 					</div>
 
 					<div class="col-sm-4 offset-md-1">
-						<button type="button" class="btn btn-outline-success btn-block" onclick="registerEvent()">Register</button>
+						<button type="submit" class="btn btn-outline-success btn-block" onclick="registerEvent()">Register</button>
 					</div>
 				</div>
 			</form>
