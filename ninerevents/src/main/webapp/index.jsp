@@ -25,10 +25,26 @@
 
     <style>
         /* Fix NavBar to the top */
-        body {
-            min-height: 75rem;
-            padding-top: 4.5rem;
+		html {
+        position: relative;
+        min-height: 100%;
         }
+        body {
+		/* Margin bottom by footer height */
+		margin-bottom: 60px;
+		}
+        .footer {
+		position: absolute;
+		bottom: 0;
+		width: 100%;
+		/* Set the fixed height of the footer here */
+		height: 60px;
+		line-height: 60px; /* Vertically center the text there */
+		background-color: #f5f5f5;
+		}
+		.top-adjust {
+		margin-top:5%;
+		}
 
         /* Size for Material Icons */
         .material-icons.md-18 { font-size: 18px; }
@@ -40,6 +56,7 @@
     </style>
 
     <body>
+        <!-- HEADER - END -->
         <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
             <a class="navbar-brand" href="/ninerevents/">Niner Events</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -63,8 +80,9 @@
                     </ul>   
             </div>
         </nav>
+        <!-- HEADER - END -->
 
-        <main role="main" class="container-fluid">
+        <main role="main" class="container-fluid top-adjust">
             <div class="card text-center border-primary">
                 <div class="card-header">
                     <strong>
@@ -122,6 +140,14 @@
                 </aside>
             </div>
         </main>
+
+        <!-- Footer BEGIN -->
+		<footer class="footer">
+			<div class="container">
+				<span class="text-muted">&copy; University of North Carolina at Charlotte</span>
+			</div>
+		</footer>
+		<!-- Footer END -->
 
         <!-- Bootstrap core JavaScript
             ================================================== -->
