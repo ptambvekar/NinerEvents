@@ -14,7 +14,7 @@
 		<!-- jQuery UI -->
 		<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 		<!-- Bootstrap Form Helpers -->
-		<link href="../webapp/css/bootstrap-formhelpers.min.css" rel="stylesheet" media="screen">
+		<link href="css/bootstrap-formhelpers.min.css" rel="stylesheet" media="screen">
 	</head>
 
 	<style>
@@ -167,7 +167,7 @@
 					</div>
 
 					<div class="col-sm-4 offset-md-1">
-						<button type="submit" class="btn btn-outline-success btn-block">Register</button>
+						<button type="button" class="btn btn-outline-success btn-block" onclick="registerEvent()">Register</button>
 					</div>
 				</div>
 			</form>
@@ -188,6 +188,33 @@
 		<script src="https://getbootstrap.com/assets/js/vendor/popper.min.js"></script>
 		<script src="https://getbootstrap.com/dist/js/bootstrap.min.js"></script>
 		<!-- Bootstrap Form Helpers -->
-		<script src="../webapp/js/bootstrap-formhelpers.min.js"></script>
+		<script src="js/bootstrap-formhelpers.min.js"></script>
+		
+		<script>
+			function registerEvent() {
+				var email = $("#inputEmail").val();
+				var firstname = $("#firstname").val();
+				var lastname = $("#lastname").val();
+				var address = $("#inputAddress");
+				var address2 = $("#inputAddress2");
+				var city = $("#inputCity");
+				var state = $("#inputState");
+				var zip = $("#inputZip");
+
+				var dataString = {
+					"inputEmail":email,
+					"firstName":firstname,
+					"lastName":lastname,
+					"address":address,
+					"address2":address2,
+					"city":city,
+					"state":state,
+					"zip":zip,
+					"country":"United States"
+				}
+
+				console.log(dataString);
+			}
+		</script>
 	</body>
 </html>
