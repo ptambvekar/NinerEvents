@@ -96,7 +96,6 @@ public class EventController {
 		service.addEvent(event);
 	}
 	
-	
 	@Path(value="eventLocations")
 	@Produces(MediaType.APPLICATION_JSON)
 	@GET
@@ -113,6 +112,15 @@ public class EventController {
 		//creation of this list will be in service layer
 		List<EventCategory> eventsList = service.getEventTypes();
 		return eventsList;
+	}
+	
+	@POST
+	@Path(value="registerEvent")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void registerEvent(Event event){		
+		//creation of this list will be in service layer
+
 	}
 
 }
