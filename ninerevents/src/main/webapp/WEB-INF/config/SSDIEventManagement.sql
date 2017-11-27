@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 26, 2017 at 10:27 PM
+-- Generation Time: Nov 26, 2017 at 11:20 PM
 -- Server version: 5.6.21
 -- PHP Version: 5.5.19
 
@@ -92,7 +92,7 @@ CREATE TABLE IF NOT EXISTS `event` (
   `event_end` datetime NOT NULL,
   `venue_id` int(10) DEFAULT NULL,
   `imp_flag` varchar(10) DEFAULT NULL,
-  `featured_flag` varchar(11) NOT NULL,
+  `featured_flag` varchar(11) DEFAULT NULL,
   `host_id` int(10) DEFAULT NULL
 ) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
