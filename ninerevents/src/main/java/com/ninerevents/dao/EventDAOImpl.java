@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -60,12 +61,12 @@ public class EventDAOImpl implements EventDAO {
 	public void insertEvents(Event event){
 		
 		String SQL = "INSERT INTO EVENT " +
-			"(event_name, description, event_start, event_end) VALUES (?, ?, ?, ?)";
+			"(event_name, description, event_start, event_end, category_id, venue_id) VALUES (?, ?, ?, ?,?,?)";
 
-
+		jdbcTemplateObject = new JdbcTemplate(dataSource);
 		jdbcTemplateObject.update(SQL, new Object[] { event.getEventName(),
-			event.getEventDescription(), event.getStartDateTime(), event.getEndDateTime()
-		});
+			event.getEventDescription(), event.getStartDateTime(), event.getEndDateTime(),
+			event.getEventCategory(),event.getVenue_name()});
 	}
 
 
@@ -97,11 +98,67 @@ public class EventDAOImpl implements EventDAO {
 			SQL.append(" and venue_id="+location);
 		}
 		if(category!=null) {
-			SQL.append("and category_id="+category);
+			SQL.append(" and category_id="+category);
 		}
 		List<CalendarEvent> events = jdbcTemplateObject.query(SQL.toString(),new CalenderEventMapper());
 		
 		return events;
 			
 	}
+
+	
+	public String checkPerson(Event event) {
+		 
+		 String SQL = "select id from person where email_address = ?" ;
+		 String id =null;
+		 try {
+			 id = jdbcTemplateObject.queryForObject(SQL, new Object[] {event.getEmail_address()},String.class);	 
+		 }
+		 catch(DataAccessException e) {
+			id=null; 
+		 }
+		
+		 return id;
+//		 System.out.println(rows.size());
+//		 if (rows == null) {
+//			 return false;
+//		 }
+//		 else
+//			 return true;
+//		
+	}
+	
+	@Override
+	public int registerEvents(Event event) {
+		
+		String SQL = "INSERT INTO Registration " +
+				"(person_id, booked_event_id, date_booked) VALUES ((select id from Person where email_address = ?), ?, CURDATE())";
+		int returncode=0;
+			try {
+				returncode=jdbcTemplateObject.update(SQL, new Object[] {event.getEmail_address(), event.getEventId()});	
+			}
+			catch(DataAccessException e) {
+				returncode =-1;
+			}
+		return returncode;
+		
+	}
+
+	@Override
+	public int registerNewPerson(Event event) {
+		String SQL = "INSERT INTO person (first_name, last_name,line1,line2,city,state,zip,email_address) VALUES (?,?,?,?,?,?,?,?)";
+		jdbcTemplateObject = new JdbcTemplate(dataSource);
+		int returncode=0;
+			try {
+				returncode=jdbcTemplateObject.update(SQL, new Object[] {event.getFirst_name(), event.getLast_name(),event.getLine1()
+				,event.getLine2(),event.getCity(),event.getState(),event.getZip(),event.getEmail_address()});	
+			}
+			catch(DataAccessException e) {
+				returncode =-1;
+			}
+		return returncode;
+	}
+	
+	
+	
 }

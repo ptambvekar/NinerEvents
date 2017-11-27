@@ -118,11 +118,24 @@ public class EventController {
 	@Path(value="registerEvent")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public void registerEvent(Event event){		
+	public int registerEvent(Event event){		
 		//creation of this list will be in service layer
+		
+		
+		String id = service.checkPerson(event);
+		if(id!=null) {
+			int returncode=service.registerEvent(event);
+			if(returncode>0)
+				return returncode; //when user exists and they are successfully registerted to the event.
 
+			return -1;//when user exists but encounters error to register for the event
+		}
+		else {
+			return 0;	//when the user needs to register first
+		}
+		
 	}
-
+	
 	@POST
 	@Path(value="searchresults")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -130,6 +143,26 @@ public class EventController {
 	public List<CalendarEvent> searchEvents(SearchRequest request){		
 		
 		return service.getSearchResults(request);
+	}
+	@POST
+	@Path(value="registerPerson")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public int registerperson(Event event){		
+		//creation of this list will be in service layer
+		
+		int regPerson=service.registerPerson(event);
+		int returncode=-1;
+		if(regPerson>0) {
+			returncode=service.registerEvent(event);
+			if(returncode>0)
+				return returncode;
+			return -1;
+		}
+		else {
+			return -1;
+		}
+		
 	}
 	
 }

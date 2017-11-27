@@ -47,5 +47,11 @@ public interface EventDAO {
 	public List<EventCategory> getEventType();
 
 	public List<CalendarEvent> getSearchResults(String keyword,String location,String category);
+
+	public int registerEvents(Event event);
+	
+	public String checkPerson(Event event);
+	
+	public int registerNewPerson(Event event);
 	
 }

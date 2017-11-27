@@ -102,16 +102,23 @@
                 <aside class = "d-none d-sm-block col-md-2">
                     <div class = "card text-center border-warning">
                         <p class = "card-header">
-                            Calendar
+                            Actions
                         </p>
-
-                        <div class = "card-body">
-                            <div id="datepicker" data-date="<% new java.util.Date(); %>"></div>
-                            <span id="datepicker"></span>
-                        </div>
                         
                         <div class="card-footer text-muted">
-                        	<a href="html/add_event_page.html" class="btn btn-primary">Create Event</a>
+                        	<div class="row">
+                        		<div class="col">
+                        			<a href="jsp/browseEvents.jsp" class="btn btn-outline-primary btn-block">Browse Events</a>
+                        		</div>
+                        		
+                       		</div>
+                        	
+                        	<div class="row mt-5">
+                        		<div class="col">
+                        			<a href="jsp/addNewEvent.jsp" class="btn btn-outline-primary btn-block">Create Event</a>
+                        		</div>
+                        		
+                        	</div>
                         </div>
                     </div>
                 </aside>

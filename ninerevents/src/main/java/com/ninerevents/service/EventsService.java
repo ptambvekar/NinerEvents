@@ -34,5 +34,11 @@ public interface EventsService {
 	public List<EventCategory> getEventTypes();
 	
 	public List<CalendarEvent> getSearchResults(SearchRequest request);
+	
+	public int registerEvent(Event event);
+	
+	public String checkPerson(Event event);
+	
+	public int registerPerson(Event event);
 
 }

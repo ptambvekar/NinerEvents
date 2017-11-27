@@ -61,7 +61,7 @@ $(function() {
 					sResult += '</div><div class="card-body bg-light h-200"><p class="card-title">';
 				    sResult += event.eventDescription + '</p><hr/><p class = "card-text">' + moment(event.startDateTime).format('DD MMM YYYY');
 				    sResult += "<br>"+moment(event.startDateTime).format('hh:mm A');
-				    sResult += '</p></div><div class="card-footer text-muted"><a href="/ninerevents/jsp/EventDetail.jsp?event='+event.eventId+'" class="btn btn-primary">Register</a></div></div></div>'
+				    sResult += '</p></div><div class="card-footer text-muted"><a href="/ninerevents/jsp/EventDetail.jsp?event='+event.eventId+'" class="btn btn-outline-primary">Register</a></div></div></div>'
 			});
 			$('#featuredEvents').append(sResult);
 	}

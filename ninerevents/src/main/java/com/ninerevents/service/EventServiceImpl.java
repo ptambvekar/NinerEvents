@@ -105,6 +105,25 @@ public class EventServiceImpl implements EventsService{
 		
 		return eventJDBCTemplate.getSearchResults(keyword,location,category);
 	}
+
+
+	@Override
+	public int registerEvent(Event event) {
+		// TODO Auto-generated method stub
+		return eventJDBCTemplate.registerEvents(event);		
+	}
+
+	@Override
+	public String checkPerson(Event event) {
+		String id = eventJDBCTemplate.checkPerson(event);
+		return id;
+	}
+
+	@Override
+	public int registerPerson(Event event) {
+		return eventJDBCTemplate.registerNewPerson(event);
+	}
+
 	
 	
 }

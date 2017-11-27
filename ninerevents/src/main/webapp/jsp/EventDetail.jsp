@@ -99,7 +99,45 @@
                 </div>
                 <!-- Event Details Section END -->
             </div>
-        </main>
+			
+			<div class="modal fade" id="register-modal" tabindex="-1" role="dialog"
+				aria-labelledby="register-modal" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">Register</h5>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<form id='registerForm'>
+							<div class="modal-body">
+								<div class="container-fluid">
+									<div class="form-group row">
+										<label for="input-email" class="col-sm-2 col-form-label">Email</label>
+										<div class="col-sm-10">
+											<div class="input-group">
+												<input type="text" class="form-control" id="input-email"
+													placeholder="example@email.com" name='email'/>
+												<div class="input-group-addon">
+													<i class="material-icons">email</i>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="reset" class="btn btn-outline-secondary"
+									data-dismiss="modal">Close</button>
+								<button type="submit" class="btn btn-outline-primary">Register</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			 </main>
         <!-- Main Content END -->
 
         <!-- Footer BEGIN -->
@@ -140,10 +178,11 @@
 		                 event.venue_name+' </div></div><div class = "col-xs-12 col-md-6"><h5> Event Date and Time </h5><div> '+moment(event.startDateTime).format('DD MMM YYYY')+                         
 		                '</div><div> '+moment(event.startDateTime).format('hh:mm A')+' </div></div></div> <br/> <div class = "row justify-content-center"><div class = "col-*-12"><h5>Contact Information</h5></div></div>'+
 		                '<div class = "row justify-content-center"><div class = "col-*-12"><div>'+event.first_name+' '+event.last_name+
-		                '</div><div> '+event.phone_no+' </div> <div> '+event.email_address+' </div></div></div></div> <div class = "card-footer">'+
-		                '<a href="#register-modal" class="btn btn-outline-success btn-success btn-lg" role="button" data-toggle="modal" data-target="#register-modal">'+
+		                '</div><div> '+event.phone_no+' </div> <div> '+event.email_address+' </div></div></div></div>'+
+		                '<div class = "card-footer"> <a href="#register-modal" class="btn btn-outline-success btn-success btn-lg" role="button" data-toggle="modal" data-target="#register-modal"> Register </a></div>';
+		                /* '<a href="#register-modal" class="btn btn-outline-success btn-success btn-lg" role="button" data-toggle="modal" data-target="#register-modal">'+
 		                'Register </a></div><div class="modal fade" id="register-modal" tabindex="-1" role="dialog" aria-labelledby="register-modal" aria-hidden="true"><div class="modal-dialog" role="document"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="exampleModalLabel">Register</h5><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div><form><div class="modal-body"><div class="container-fluid"><div class="form-group row"><label for="input-email" class="col-sm-2 col-form-label">Email</label><div class="col-sm-10"><div class="input-group"><input type="text" class="form-control" id="input-email" placeholder="example@email.com"/><div class="input-group-addon"><i class="material-icons">email</i></div></div></div></div></div></div><div class="modal-footer"><button type="reset" class="btn btn-outline-secondary" data-dismiss="modal">Close</button><button type="button" class="btn btn-outline-primary">Register</button></div></form></div></div></div>'
-		                
+		                 */
 					$('#eventDetail').append(sResult);
 			}
 		 	var search=window.location.search?window.location.search:"";
@@ -163,6 +202,33 @@
 
 		 
 		 </script>
+		 <script>
+		$(function() {
+			var datatosend={}
+			$('#registerForm').on('submit',function(e){
+				e.preventDefault();
+				var form=$(this)
+				
+				datatosend['eventId']=window.location.search.split('?event=')[1];
+				datatosend['email_address']= $("#input-email").val();
+				datatosend;
+				$.ajax({
+					url:'/ninerevents/webapi/event/registerEvent',
+					dataType:'json',
+					 contentType: "application/json",
+					data:JSON.stringify(datatosend),
+					success:function(response){
+						form.atr('action','/ninerevents/jsp/')
+						console.log(response)
+					},
+					type:'POST',
+					async:false
+				});
+			})
+				
+				
 
+		});
+	</script>
     </body>
 </html>
