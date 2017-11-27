@@ -68,7 +68,10 @@ $(function() {
 				}
 				alert && alert.addClass('d-none');
 				var fullCalendar=$('#fullCalendar');
-				
+				response.forEach(function(event) {
+					//event.url="/ninerevents/jsp/eventDetails.jsp";
+					event.url = "/ninerevents/jsp/EventDetail.jsp?event="+ event.id
+				});
 				var searchSource={
 						id:'searchSource',
 						events:response
@@ -133,13 +136,18 @@ $(function() {
 						contentType : 'application/json',
 						success : function(resp) {
 							if (!resp || 1 > resp.length) {
-								alert('No events posted for this month');
+								var alert=$('#alert');
+								alert && alert.removeClass('d-none');
+								var alertSpanElement=$('#alertMessage');
+								alertSpanElement && alertSpanElement.text('No Events for this month..');
 								return;
 							}
 							resp.forEach(function(event) {
 								//event.url="/ninerevents/jsp/eventDetails.jsp";
 								event.url = "/ninerevents/jsp/EventDetail.jsp?event="+ event.id
 							});
+							var alert=$('#alert');
+							alert && alert.addClass('d-none');
 							callback(resp);
 						}
 					});
@@ -151,7 +159,6 @@ $(function() {
 						themeSystem : 'standard',
 						allDayDefault : false,
 						aspectRatio : 1.7,
-						cache : true,
 						eventBackgroundColor : '#6495ED',
 						header : {
 							left : 'prev',

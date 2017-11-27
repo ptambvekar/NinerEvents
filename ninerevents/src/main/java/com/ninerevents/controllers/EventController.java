@@ -123,12 +123,17 @@ public class EventController {
 		
 		
 		String id = service.checkPerson(event);
-		if(id!=null) {
+		
+		if(id==null) {// error in accessing the database
+			return -1;
+		}
+		else if(!"notfound".equals(id)) {
 			int returncode=service.registerEvent(event);
 			if(returncode>0)
 				return returncode; //when user exists and they are successfully registerted to the event.
-
-			return -1;//when user exists but encounters error to register for the event
+			if(returncode==-1)
+				return returncode; //the user is already registered to this event.
+			return -2;// error in accessing the database
 		}
 		else {
 			return 0;	//when the user needs to register first
@@ -144,6 +149,8 @@ public class EventController {
 		
 		return service.getSearchResults(request);
 	}
+	
+	//create the person and then register the event 
 	@POST
 	@Path(value="registerPerson")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -156,11 +163,13 @@ public class EventController {
 		if(regPerson>0) {
 			returncode=service.registerEvent(event);
 			if(returncode>0)
-				return returncode;
-			return -1;
+				return returncode;	//person registered successfully
+			if(returncode==-1)
+				return returncode; //the user is already registered to this event.
+			return -2;			// error in registering the person to the event.
 		}
 		else {
-			return -1;
+			return -3; //error in creating the person.
 		}
 		
 	}

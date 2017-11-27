@@ -51,30 +51,45 @@
 	<body>
 		<!-- HEADER - BEGIN -->
 		<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-			<a class="navbar-brand" href="#">Niner Events</a>
+			<a class="navbar-brand" href="/ninerevents/">Niner Events</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 			</button>
 			<div class="collapse navbar-collapse" id="navbarCollapse">
 				<ul class="nav navbar-nav ml-auto">
-					<li class="nav-item">
-						<a class="nav-link" href="#">
-						<i class="material-icons md-18">home</i>
-						Home
-						</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#">
-						<i class="material-icons md-18">date_range</i>
-						Events
-						</a>
-					</li>
-				</ul>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/ninerevents/">
+                            <i class="material-icons md-18">home</i>
+                            Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="browseEvents.jsp">
+                            <i class="material-icons md-18">date_range</i>
+                            Events
+                        </a>
+                    </li>
+                </ul>	
 			</div>
 		</nav>
 		<!-- HEADER - END -->
 		<main role="main" class="container-fluid bg-light text-center top-adjust">
-			<form id="registerForm" class= "pt-3 pb-3" style="text-align:left">
+			<div class="row d-none" id="alert">
+        		<div class="col-md-8 offset-md-2">
+        			<div class="alert alert-warning alert-dismissible fade show"
+								role="alert">
+						<span id="alertMessage"></span>
+					</div>
+        		</div>	
+        	</div>
+        	<div class="row d-none" id="successAlert">
+        		<div class="col-md-8 offset-md-2">
+	        		<div class="alert alert-success alert-dismissible fade show" role="alert">
+						<span id="successMessage"></span>
+					</div>
+				</div>
+        	</div>
+			<form id="registerForm" class= "pt-2 pb-2" style="text-align:left">
 				<div class = "row">
 					<div class="col-sm-12">
 						<h2>
@@ -87,7 +102,7 @@
 					<label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
 
 					<div class="form-group col-sm-4">
-						<input type="email" class="form-control" id="inputEmail" placeholder="Email" required>
+						<input type="email" class="form-control" id="inputEmail" placeholder="Email" readonly="readonly">
 					</div>
 				</div>
 
@@ -163,8 +178,8 @@
 				<hr/>
 
 				<div class="form-group row">
-					<div class="col-sm-1">
-						<button type="reset" class="btn btn-outline-secondary">Clear</button>
+					<div class="col-xs-12 col-sm-1">
+						<button type="reset" class="btn btn-outline-secondary btn-block">Clear</button>
 					</div>
 
 					<div class="col-sm-4 offset-md-1">
@@ -192,9 +207,36 @@
 		<script src="../js/bootstrap-formhelpers.min.js"></script>
 		
 		<script>
-			function registerEvent() {
+		
+		$(function(){
 			
-				var email_address = $("#inputEmail").val();
+			
+				$('#registerForm').on('submit',function(e){
+					e.preventDefault();
+					registerEvent();
+				});
+				
+				var errorAlert=$('#alert');
+				var errorAlertSpan=$('#alertMessage');
+				var successAlert=$('#successAlert');
+				var successAlertSpan=$('#successMessage');
+				successAlert && successAlert.addClass('d-none');
+				var params=window.location.search.split('&');
+				var email=params[1].split('=')[1]
+				var evId=params[0].split('?event=')[1];
+				$("#inputEmail").val(email);
+				
+				function registerEvent() {
+				
+				var errorAlert=$('#alert');
+				var errorAlertSpan=$('#alertMessage');
+				var successAlert=$('#successAlert');
+				var successAlertSpan=$('#successMessage');
+		
+				errorAlert && errorAlert.removeClass('d-none');
+				successAlert && successAlert.removeClass('d-none');
+				
+				var email_address = email;
 				var first_name = $("#firstname").val();
 				var last_name = $("#lastname").val();
 				var line1 = $("#inputAddress").val();
@@ -204,6 +246,7 @@
 				var zip = $("#inputZip").val();
 
 				var dataString = {
+					"eventId":evId,
 					"email_address":email_address,
 					"first_name":first_name,
 					"last_name":last_name,
@@ -222,17 +265,43 @@
 			       	data: JSON.stringify(dataString),
 			       	dataType:"json",
 					success:function(response){
-						console.log(response)
+						if(response==-3){ //error in creating the person
+							successAlert.addClass('d-none');
+							errorAlert && errorAlert.removeClass('d-none');
+							errorAlertSpan && errorAlertSpan.text('Failed to create user with these details');
+							return;
+						}
+						if(response==-2){ //error in creating the person
+							successAlert.addClass('d-none');
+							errorAlert && errorAlert.removeClass('d-none');
+							errorAlertSpan && errorAlertSpan.text('A user with this email address already has registered for this event');
+							return;
+						}
+						else if(response==-1){// error in registering the person to the event.
+							successAlert.addClass('d-none');
+							errorAlert && errorAlert.removeClass('d-none');
+							errorAlertSpan && errorAlertSpan.text('Oops... Something went wrong !');
+							return;
+						}
+						else if(response>0){ //person registered successfully
+							errorAlert.addClass('d-none');
+							successAlert && successAlert.removeClass('d-none');
+							successAlertSpan && successAlertSpan.text('Registered successfully.');
+							return;
+						}
+						
+					},
+					error:function(response){
+						successAlert.addClass('d-none');
+						errorAlert && errorAlert.removeClass('d-none');
+						errorAlertSpan && errorAlertSpan.text('Oops... Something went wrong !');
 					}
 				});
 
 				console.log(dataString);
 			}
 			
-			$('#registerForm').on('submit',function(e){
-				e.preventDefault();
-				registerEvent();
-			});
+		});
 		</script>
 
 		

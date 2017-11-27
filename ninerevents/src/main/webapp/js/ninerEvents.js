@@ -16,8 +16,12 @@ $(function() {
 			$('#upcomingEvents').append(sResult);
 			return;
 		}
+		var displayObject={};
+		Object.keys(data).sort().forEach(function(key){
+			displayObject[key]=data[key]
+		})
 			var sResult = '';
-			$.each(data,function(date,events){
+			$.each(displayObject,function(date,events){
 				sResult += '<thead class="thead-light"><tr><th colspan="2">';
 				sResult += moment(date).format('LL') + '</th> </tr> </thead><tbody>';
 				events.forEach(function(event){

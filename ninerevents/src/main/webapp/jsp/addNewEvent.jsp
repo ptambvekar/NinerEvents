@@ -269,11 +269,8 @@ w<!DOCTYPE html>
         <!-- Date Picker -->
         <script>
             $(function(){
-            if ( $('[type="date"]').prop('type') != 'date' ) {
-            $('[type="date"]').datepicker();
-            }
-              $( "#datepicker1" ).datepicker();
-              $( "#datepicker2" ).datepicker();
+              $( "#datepicker1" ).datepicker({minDate: 0});
+              $( "#datepicker2" ).datepicker({minDate: 0});
 
             });
         </script>

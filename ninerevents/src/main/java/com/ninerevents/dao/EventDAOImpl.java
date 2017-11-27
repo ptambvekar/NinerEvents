@@ -2,13 +2,15 @@ package com.ninerevents.dao;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 import javax.sql.DataSource;
 
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DuplicateKeyException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 
 import com.ninerevents.model.CalendarEvent;
 import com.ninerevents.model.Event;
@@ -27,7 +29,7 @@ public class EventDAOImpl implements EventDAO {
 	}
 
 	public List<Event> listEvents() {
-		String SQL = "SELECT * FROM Event WHERE event_start IN (SELECT * FROM ( SELECT DISTINCT event_start FROM Event WHERE event_start > CURDATE( ) ORDER BY event_start LIMIT 3) AS t)";
+		String SQL = "SELECT * FROM Event WHERE event_start IN (SELECT * FROM ( SELECT DISTINCT event_start FROM Event WHERE event_start > CURDATE( )+1 ORDER BY event_start LIMIT 3) AS t)";
 		
 		jdbcTemplateObject = new JdbcTemplate(dataSource);
 		List<Event> events = jdbcTemplateObject.query(SQL, new EventMapper());
@@ -59,14 +61,15 @@ public class EventDAOImpl implements EventDAO {
 	}
 	
 	public void insertEvents(Event event){
-		
+		Random ran = new Random();
+		int x = ran.nextInt(1) + 5;
 		String SQL = "INSERT INTO EVENT " +
-			"(event_name, description, event_start, event_end, category_id, venue_id) VALUES (?, ?, ?, ?,?,?)";
+			"(event_name, description, event_start, event_end, category_id, venue_id, host_id) VALUES (?, ?, ?, ?,?,?,?)";
 
 		jdbcTemplateObject = new JdbcTemplate(dataSource);
 		jdbcTemplateObject.update(SQL, new Object[] { event.getEventName(),
 			event.getEventDescription(), event.getStartDateTime(), event.getEndDateTime(),
-			event.getEventCategory(),event.getVenue_name()});
+			event.getEventCategory(),event.getVenue_name(),x});
 	}
 
 
@@ -80,6 +83,7 @@ public class EventDAOImpl implements EventDAO {
 	@Override
 	public List<EventLocation> getEventLocations() {
 		String SQL = "select t.id as id, t.venue_name as venueName from venue t";
+		jdbcTemplateObject = new JdbcTemplate(dataSource);
 		List<EventLocation> locations = jdbcTemplateObject.query(SQL, new BeanPropertyRowMapper(EventLocation.class));
 		return locations;
 	}
@@ -87,6 +91,7 @@ public class EventDAOImpl implements EventDAO {
 	@Override
 	public List<EventCategory> getEventType() {
 		String SQL = "select t.id as id, t.category_name as categoryName from category t";
+		jdbcTemplateObject = new JdbcTemplate(dataSource);
 		List<EventCategory> locations = jdbcTemplateObject.query(SQL, new BeanPropertyRowMapper(EventCategory.class));
 		return locations;
 	}
@@ -94,6 +99,7 @@ public class EventDAOImpl implements EventDAO {
 	@Override
 	public List<CalendarEvent> getSearchResults(String keyword,String location, String category) {
 		StringBuilder SQL = new StringBuilder("select * from event where LOWER(event_name) like LOWER('%"+keyword+"%')");
+		jdbcTemplateObject = new JdbcTemplate(dataSource);
 		if(location!=null) {
 			SQL.append(" and venue_id="+location);
 		}
@@ -106,44 +112,59 @@ public class EventDAOImpl implements EventDAO {
 			
 	}
 
-	
+	/**
+	 * Return Codes:
+	 * id > 0 = the person already exists.
+	 * id = "notfound" = this is a new user and needs to first give their details.
+	 * id =null --> some other exception while accessing db.  
+	 * */
 	public String checkPerson(Event event) {
-		 
 		 String SQL = "select id from person where email_address = ?" ;
+		 jdbcTemplateObject = new JdbcTemplate(dataSource);
 		 String id =null;
 		 try {
 			 id = jdbcTemplateObject.queryForObject(SQL, new Object[] {event.getEmail_address()},String.class);	 
 		 }
 		 catch(DataAccessException e) {
-			id=null; 
+			 e.printStackTrace();
+			 if(e instanceof EmptyResultDataAccessException) 
+				id="notfound"; 
 		 }
 		
-		 return id;
-//		 System.out.println(rows.size());
-//		 if (rows == null) {
-//			 return false;
-//		 }
-//		 else
-//			 return true;
-//		
+		 return id;	
 	}
-	
+	/**
+	 * Return Codes:
+	 * code>0 = registered to the event successfully
+	 * code -1= the user is already registered.
+	 * code -2= some other exception while adding records.  
+	 * */
 	@Override
 	public int registerEvents(Event event) {
 		
 		String SQL = "INSERT INTO Registration " +
 				"(person_id, booked_event_id, date_booked) VALUES ((select id from Person where email_address = ?), ?, CURDATE())";
+		jdbcTemplateObject = new JdbcTemplate(dataSource);
 		int returncode=0;
 			try {
 				returncode=jdbcTemplateObject.update(SQL, new Object[] {event.getEmail_address(), event.getEventId()});	
 			}
 			catch(DataAccessException e) {
-				returncode =-1;
+				e.printStackTrace();
+				if(e instanceof DuplicateKeyException)
+					returncode =-1;
+				else returncode= -2;
 			}
 		return returncode;
 		
 	}
 
+	/**
+	 * Return Codes:
+	 * code>0 = Person added successfully
+	 * code -1 = the user already exists.
+	 * code -2= some other exception while adding records.  
+	 * */
 	@Override
 	public int registerNewPerson(Event event) {
 		String SQL = "INSERT INTO person (first_name, last_name,line1,line2,city,state,zip,email_address) VALUES (?,?,?,?,?,?,?,?)";
@@ -154,7 +175,10 @@ public class EventDAOImpl implements EventDAO {
 				,event.getLine2(),event.getCity(),event.getState(),event.getZip(),event.getEmail_address()});	
 			}
 			catch(DataAccessException e) {
-				returncode =-1;
+				e.printStackTrace();
+				if(e instanceof DuplicateKeyException)
+					returncode =-1;
+				else returncode= -2;
 			}
 		return returncode;
 	}

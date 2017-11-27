@@ -138,9 +138,9 @@ body {
 					<div class = "col-sm-8 offset-md-2">
 						<div class="alert alert-warning alert-dismissible fade show"role="alert">
 							<span id="alertMessage"></span>
-							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<!-- <button type="button" class="close" data-dismiss="alert" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
-							</button>
+							</button> -->
 						</div>
 					</div>
 				</div>
