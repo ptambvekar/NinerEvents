@@ -92,7 +92,7 @@ public class EventDAOImpl implements EventDAO {
 
 	@Override
 	public List<CalendarEvent> getSearchResults(String keyword,String location, String category) {
-		StringBuilder SQL = new StringBuilder("select * from event where event_name= '"+keyword+"'");
+		StringBuilder SQL = new StringBuilder("select * from event where LOWER(event_name) like LOWER('%"+keyword+"%')");
 		if(location!=null) {
 			SQL.append(" and venue_id="+location);
 		}

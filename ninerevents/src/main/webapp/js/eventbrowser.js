@@ -59,7 +59,30 @@ $(function() {
 			url:'/ninerevents/webapi/event/searchresults',
 			data:JSON.stringify(searchQuery),
 			success:function(response){
-				console.log(response)
+				var alert=$('#alert');
+				if(!response || 1>response.length){
+					var alertSpanElement=$('#alertMessage');
+					alert && alert.removeClass('d-none');
+					alertSpanElement && alertSpanElement.text('No Events Found');
+					return;
+				}
+				alert && alert.addClass('d-none');
+				var fullCalendar=$('#fullCalendar');
+				
+				var searchSource={
+						id:'searchSource',
+						events:response
+				};
+				fullCalendar.fullCalendar('removeEventSources');
+				$('#fullCalendar').fullCalendar('addEventSource',searchSource);
+				
+			},
+			error:function(response){
+				console.error(response);
+				var alert=$('#alert');
+				alert && alert.removeClass('d-none');
+				var alertSpanElement=$('#alertMessage');
+				alertSpanElement && alertSpanElement.text('Oops... Something Went Wrong !');
 			},
 			dataType:'json',
 			contentType:'application/json'
@@ -67,63 +90,76 @@ $(function() {
 		
 	});
 	
+	$('#searchForm').on('reset',function(e){
+		var fullCalendar=$('#fullCalendar');
+		fullCalendar.fullCalendar('removeEventSources');
+		$('#fullCalendar').fullCalendar('addEventSource',deaultEventsSource);
+		var alert=$('#alert');
+		alert && alert.addClass('d-none');
+	});
+	
+	var deaultEventsSource={
+			id:'defaultSource',
+			events: function(start, end, timezone, callback) {
+				// Check if the default start date is 1st of the
+				// month or not.
+				if (1 != start.get('date')) {// if not, that
+					// means the
+					// calendar shows
+					// some days from
+					// previous month in
+					// the calendar.
+					start.add('1', 'months') // hence go to next
+					// month first, and
+					// then LATER,
+					// calculate start
+					// date and end date
+					// of that month
+				}
+				var today = $("#fullCalendar").fullCalendar(
+						'getDate')
+
+				dataToSend = {// we want to load only future
+					// events and hence set start date
+					// as current date if the 'start' is
+					// in current month.
+					startDate : today.isSame(start, 'month') ? today.format("YYYY-MM-DD HH:mm:ss").toString(): start.startOf('month').format("YYYY-MM-DD HH:mm:ss").toString(),
+					endDate : start.endOf('month').format("YYYY-MM-DD HH:mm:ss").toString()
+				}
+				$.post({
+						url : '/ninerevents/webapi/event/monthlyEvents',
+						data : JSON.stringify(dataToSend),
+						dataType : 'json',
+						contentType : 'application/json',
+						success : function(resp) {
+							if (!resp || 1 > resp.length) {
+								alert('No events posted for this month');
+								return;
+							}
+							resp.forEach(function(event) {
+								//event.url="/ninerevents/jsp/eventDetails.jsp";
+								event.url = "/ninerevents/jsp/EventDetail.jsp?event="+ event.id
+							});
+							callback(resp);
+						}
+					});
+			}
+			
+		}
 	$("#fullCalendar")
 			.fullCalendar({
 						themeSystem : 'standard',
 						allDayDefault : false,
 						aspectRatio : 1.7,
 						cache : true,
-						eventBackgroundColor : 'lightblue',
+						eventBackgroundColor : '#6495ED',
 						header : {
 							left : 'prev',
 							center : 'title',
 							right : 'today,month,basicWeek,basicDay,next',
 							backgroundColor : '#6495ED'
 						},
-						events : function(start, end, timezone, callback) {
-							// Check if the default start date is 1st of the
-							// month or not.
-							if (1 != start.get('date')) {// if not, that
-								// means the
-								// calendar shows
-								// some days from
-								// previous month in
-								// the calendar.
-								start.add('1', 'months') // hence go to next
-								// month first, and
-								// then LATER,
-								// calculate start
-								// date and end date
-								// of that month
-							}
-							var today = $("#fullCalendar").fullCalendar(
-									'getDate')
-
-							dataToSend = {// we want to load only future
-								// events and hence set start date
-								// as current date if the 'start' is
-								// in current month.
-								startDate : today.isSame(start, 'month') ? today.format("YYYY-MM-DD HH:mm:ss").toString(): start.startOf('month').format("YYYY-MM-DD HH:mm:ss").toString(),
-								endDate : start.endOf('month').format("YYYY-MM-DD HH:mm:ss").toString()
-							}
-							$.post({
-									url : '/ninerevents/webapi/event/monthlyEvents',
-									data : JSON.stringify(dataToSend),
-									dataType : 'json',
-									contentType : 'application/json',
-									success : function(resp) {
-										if (!resp || 1 > resp.length) {
-											alert('No events posted for this month');
-											return;
-										}
-										resp.forEach(function(event) {
-											//event.url="/ninerevents/jsp/eventDetails.jsp";
-											event.url = "/ninerevents/jsp/EventDetail.jsp?event="+ event.id
-										});
-										callback(resp);
-									}
-								});
-						}
+						eventSources:[deaultEventsSource],
 					});
 
 });

@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -22,6 +21,7 @@ import com.ninerevents.model.CalendarEventsRequest;
 import com.ninerevents.model.Event;
 import com.ninerevents.model.EventCategory;
 import com.ninerevents.model.EventLocation;
+import com.ninerevents.model.SearchRequest;
 import com.ninerevents.service.EventsService;
 
 
@@ -123,4 +123,13 @@ public class EventController {
 
 	}
 
+	@POST
+	@Path(value="searchresults")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public List<CalendarEvent> searchEvents(SearchRequest request){		
+		
+		return service.getSearchResults(request);
+	}
+	
 }
