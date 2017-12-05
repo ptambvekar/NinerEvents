@@ -1,5 +1,6 @@
 package com.ninerevents.service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -15,6 +16,7 @@ import com.ninerevents.model.CalendarEvent;
 import com.ninerevents.model.Event;
 import com.ninerevents.model.EventCategory;
 import com.ninerevents.model.EventLocation;
+import com.ninerevents.model.EventName;
 import com.ninerevents.model.SearchRequest;
 
 @Service
@@ -23,23 +25,24 @@ public class EventServiceImpl implements EventsService{
 	@Autowired
 	EventDAO eventJDBCTemplate;
 	@Override
-	public Map<Date, List<Event>> upcomingEvents() {
+	public Map<String, List<Event>> upcomingEvents() {
 
-		Map<Date, List<Event>> eventsMap = new HashMap<Date,List<Event>>();
-		
+		Map<String, List<Event>> eventsMap = new HashMap<String,List<Event>>();
+		SimpleDateFormat sf= new SimpleDateFormat("YYYY-MM-dd");
 		List <Event> eventsList= new ArrayList<Event>();
 		Event e1= new Event();
 		eventsList = eventJDBCTemplate.listEvents();
 		//logic to seperate the list by event-date.
 		for(Event e:eventsList) {
-			Date eventDate=e.getStartDateTime();
-			if(!eventsMap.containsKey(eventDate)) {
+			Date eventDate=e.getStartDateTime(); 
+			String date=sf.format(eventDate);
+			if(!eventsMap.containsKey(date)){
 				List <Event> eventsList1= new ArrayList<Event>();
 				eventsList1.add(e);
-				eventsMap.put(eventDate, eventsList1);
+				eventsMap.put(date, eventsList1);
 			}
 			else {
-				eventsMap.get(eventDate).add(e);
+				eventsMap.get(date).add(e);
 			}
 		}
 		return eventsMap;
@@ -91,6 +94,11 @@ public class EventServiceImpl implements EventsService{
 	public List<EventCategory> getEventTypes() {
 		return eventJDBCTemplate.getEventType();
 	}
+	
+	@Override
+	public List<EventName> getEventNames() {
+		return eventJDBCTemplate.getEventName();
+	}
 
 
 	@Override
@@ -124,6 +132,11 @@ public class EventServiceImpl implements EventsService{
 		return eventJDBCTemplate.registerNewPerson(event);
 	}
 
-	
+	@Override
+	public int eventFeedback(Event event) {
+		
+		return eventJDBCTemplate.insertFeedback(event);
+		
+	}
 	
 }

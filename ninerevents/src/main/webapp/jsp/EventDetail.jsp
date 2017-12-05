@@ -41,7 +41,7 @@
         }
 
         .top-adjust {
-            margin-top:5%;
+            margin-top:60px;
         }
     </style>
     
@@ -95,9 +95,22 @@
 
                 <!-- Event Image BEGIN -->
                 <div class = "col-xs-12 col-md-2 col-lg-2 align-self-center">
-                    <figure class = "figure">
-                        <img src="https://avatars0.githubusercontent.com/u/1342004?s=400&v=4" class="figure-img img-fluid rounded" alt="Event Image"/>
-                    </figure>
+			<div>
+				<a href="https://www.flaticon.com/authors/smashicons"
+					title="Smashicons"></a><a href="https://www.flaticon.com/"
+					title="Flaticon"></a><a
+					href="http://creativecommons.org/licenses/by/3.0/"
+					title="Creative Commons BY 3.0" target="_blank"></a>
+			</div>
+			<!-- <div>
+				Icons made by "https://www.flaticon.com/authors/smashicons"
+					from www.flaticon.com
+				is licensed by "http://creativecommons.org/licenses/by/3.0/"
+					title="Creative Commons BY 3.0" CC 3.0 BY
+			</div> -->
+			<figure class = "figure">
+                        <img src="../image/calendar.png" class="figure-img img-fluid rounded" alt="Event Image" />
+            </figure> 
 
                     <br/>
 
@@ -206,7 +219,7 @@
 		                 event.venue_name+' </div></div><div class = "col-xs-12 col-md-6"><h5> Event Date and Time </h5><div> '+moment(event.startDateTime).format('DD MMM YYYY')+                         
 		                '</div><div> '+moment(event.startDateTime).format('hh:mm A')+' </div></div></div> <br/> <div class = "row justify-content-center"><div class = "col-*-12"><h5>Contact Information</h5></div></div>'+
 		                '<div class = "row justify-content-center"><div class = "col-*-12"><div>'+event.first_name+' '+event.last_name+
-		                '</div><div> '+event.phone_no+' </div> <div> '+event.email_address+' </div></div></div></div>'+
+		                '</div><div> '+event.phone_no+' </div> <div> '+event.email_address.toLowerCase() +' </div></div></div></div>'+
 		                '<div class = "card-footer" id="registerButton"> <a  href="#register-modal" class="btn btn-outline-success btn-success btn-lg" role="button" data-toggle="modal" data-target="#register-modal"> Register </a></div>'+
 		                '<div class = "card-footer d-none"" id="homeButton"> <a id="goHomeButton" class="btn btn-outline-success btn-success btn-block" role = "button" href="/ninerevents/">Home</a></div>';
 		                
@@ -254,7 +267,6 @@
 				var form=$(this)
 				datatosend['eventId']=window.location.search.split('?event=')[1];
 				datatosend['email_address']= $("#input-email").val();
-				datatosend;
 				$.ajax({
 					url:'/ninerevents/webapi/event/registerEvent',
 					dataType:'json',

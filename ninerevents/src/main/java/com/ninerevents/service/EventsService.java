@@ -8,6 +8,7 @@ import com.ninerevents.model.CalendarEvent;
 import com.ninerevents.model.Event;
 import com.ninerevents.model.EventCategory;
 import com.ninerevents.model.EventLocation;
+import com.ninerevents.model.EventName;
 import com.ninerevents.model.SearchRequest;
 
 /*
@@ -16,7 +17,7 @@ import com.ninerevents.model.SearchRequest;
 
 public interface EventsService {
 	
-	public Map<Date, List<Event>> upcomingEvents();
+	public Map<String, List<Event>> upcomingEvents();
 	public Event eventDetail(String id);
 	//THis list of events will come from DAO layer (via service layer).
 
@@ -40,5 +41,9 @@ public interface EventsService {
 	public String checkPerson(Event event);
 	
 	public int registerPerson(Event event);
+	
+	public int eventFeedback(Event event);
+	
+	public List<EventName> getEventNames();
 
 }

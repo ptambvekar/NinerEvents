@@ -44,7 +44,7 @@
 		background-color: #f5f5f5;
 		}
 		.top-adjust {
-		margin-top:5%;
+		margin-top:60px;
 		}
 	</style>
 
@@ -224,17 +224,23 @@
 				var params=window.location.search.split('&');
 				var email=params[1].split('=')[1]
 				var evId=params[0].split('?event=')[1];
-				$("#inputEmail").val(email);
+				
+				if(email){
+					var emailInput=$("#inputEmail").val(email);
+					emailInput[0].defaultValue=email;
+					successAlert && successAlert.addClass('d-none');
+					errorAlert && errorAlert.removeClass('d-none');
+					errorAlertSpan && errorAlertSpan.text('You Are Not There in Our Records ! Please Enter Your Details Below');
+				}
 				
 				function registerEvent() {
-				
 				var errorAlert=$('#alert');
 				var errorAlertSpan=$('#alertMessage');
 				var successAlert=$('#successAlert');
 				var successAlertSpan=$('#successMessage');
 		
-				errorAlert && errorAlert.removeClass('d-none');
-				successAlert && successAlert.removeClass('d-none');
+				errorAlert && errorAlert.addClass('d-none');
+				successAlert && successAlert.addClass('d-none');
 				
 				var email_address = email;
 				var first_name = $("#firstname").val();

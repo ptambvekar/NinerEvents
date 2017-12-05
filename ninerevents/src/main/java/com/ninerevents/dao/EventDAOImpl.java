@@ -16,6 +16,7 @@ import com.ninerevents.model.CalendarEvent;
 import com.ninerevents.model.Event;
 import com.ninerevents.model.EventCategory;
 import com.ninerevents.model.EventLocation;
+import com.ninerevents.model.EventName;
 import com.ninerevents.utils.CalenderEventMapper;
 import com.ninerevents.utils.EventDetailMapper;
 import com.ninerevents.utils.EventMapper;
@@ -29,7 +30,7 @@ public class EventDAOImpl implements EventDAO {
 	}
 
 	public List<Event> listEvents() {
-		String SQL = "SELECT * FROM Event WHERE event_start IN (SELECT * FROM ( SELECT DISTINCT event_start FROM Event WHERE event_start > CURDATE( )+1 ORDER BY event_start LIMIT 3) AS t)";
+		String SQL = "SELECT * FROM Event WHERE Date(event_start) IN (SELECT * FROM ( SELECT DISTINCT Date(event_start) as event_start FROM Event WHERE event_start > CURDATE( )+1 ORDER BY event_start LIMIT 3) AS t)";
 		
 		jdbcTemplateObject = new JdbcTemplate(dataSource);
 		List<Event> events = jdbcTemplateObject.query(SQL, new EventMapper());
@@ -94,6 +95,14 @@ public class EventDAOImpl implements EventDAO {
 		jdbcTemplateObject = new JdbcTemplate(dataSource);
 		List<EventCategory> locations = jdbcTemplateObject.query(SQL, new BeanPropertyRowMapper(EventCategory.class));
 		return locations;
+	}
+	
+	@Override
+	public List<EventName> getEventName() {
+		String SQL = "select t.id as id, t.event_name as eventName from event t where t.event_end < CURDATE()";
+		jdbcTemplateObject = new JdbcTemplate(dataSource);
+		List<EventName> eventNames = jdbcTemplateObject.query(SQL, new BeanPropertyRowMapper(EventName.class));
+		return eventNames;
 	}
 
 	@Override
@@ -183,6 +192,25 @@ public class EventDAOImpl implements EventDAO {
 		return returncode;
 	}
 	
+	@Override
+	public int insertFeedback(Event event) {
+		
+		int returncode=0;
+		try {
+		String SQL = "INSERT INTO feedback (email,first_name, last_name, event_id, rating, comments) VALUES (?,?, ?, ?, ?,?)";
+		jdbcTemplateObject = new JdbcTemplate(dataSource);
+
+		returncode=jdbcTemplateObject.update(SQL, new Object[] { event.getEmail_address(),event.getFirst_name(), event.getLast_name(), new Integer(event.getEventId()),
+				event.getRating(), event.getComments() });event.setEmail_address("jd@uncc.edu");
+		}
+		catch(DataAccessException e) {
+			e.printStackTrace();
+			if(e instanceof DuplicateKeyException)
+				returncode =-1;
+			else returncode= -2;
+		}
+		return returncode;
+	}
 	
 	
 }

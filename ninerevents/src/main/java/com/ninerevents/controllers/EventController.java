@@ -21,6 +21,7 @@ import com.ninerevents.model.CalendarEventsRequest;
 import com.ninerevents.model.Event;
 import com.ninerevents.model.EventCategory;
 import com.ninerevents.model.EventLocation;
+import com.ninerevents.model.EventName;
 import com.ninerevents.model.SearchRequest;
 import com.ninerevents.service.EventsService;
 
@@ -39,9 +40,9 @@ public class EventController {
 	@Path(value="upcomingEvents")
 	@Produces(MediaType.APPLICATION_JSON)
 	@GET
-	public Map<Date, List<Event>> upcomingEvents(){		
+	public Map<String, List<Event>> upcomingEvents(){		
 		//creation of this map will be in service layer
-		Map<Date, List<Event>> eventsMap = service.upcomingEvents();
+		Map<String, List<Event>> eventsMap = service.upcomingEvents();
 		
 		return eventsMap;
 	}
@@ -75,6 +76,15 @@ public class EventController {
 	public List<Event> importantEvents(){		
 		//creation of this list will be in service layer
 		List<Event> eventsList = service.importantEvents();
+		return eventsList;
+	}
+	
+	@Path(value="eventNames")
+	@Produces(MediaType.APPLICATION_JSON)
+	@GET
+	public List<EventName> eventNames(){
+		//creation of this list will be in service layer
+		List<EventName> eventsList = service.getEventNames();
 		return eventsList;
 	}
 	
@@ -172,6 +182,15 @@ public class EventController {
 			return -3; //error in creating the person.
 		}
 		
+	}
+	
+	@Path(value="Feedback")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	@POST
+	public int eventFeedback(Event event){		
+		//creation of this list will be in service layer
+		return service.eventFeedback(event);
 	}
 	
 }

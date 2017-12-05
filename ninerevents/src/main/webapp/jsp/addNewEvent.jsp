@@ -59,13 +59,13 @@ w<!DOCTYPE html>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="nav navbar-nav ml-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="">
+                            <a class="nav-link" href="/ninerevents/">
                                 <i class="material-icons md-18">home</i>
                                 Home
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="jsp/browseEvents.jsp">
+                            <a class="nav-link" href="browseEvents.jsp">
                                 <i class="material-icons md-18">date_range</i>
                                 Events
                             </a>
@@ -123,7 +123,7 @@ w<!DOCTYPE html>
 	                            <label for="eventName">Event Name</label>
 	                        </div>
 	                        <div class = "col-xs-12 col-md-8">
-	                            <input type="text" class="form-control" placeholder="Add event name" id="eventName">
+	                            <input type="text" class="form-control" placeholder="Add event name" id="eventName" maxlength="64">
 	                        </div>
 	                    </div>
 	            </div>
@@ -155,6 +155,13 @@ w<!DOCTYPE html>
 	                               
 
 	                            </select>
+	                        </div>
+	                        
+	                        <div class = "col-md-2">
+	                            <label for="email">Email</label>
+	                        </div>
+	                        <div class = "col-sm-12 col-md-4">
+								<input type="email" class="form-control" placeholder="Email">
 	                        </div>
 	                    </div>
 	            </div>
@@ -222,7 +229,7 @@ w<!DOCTYPE html>
 	                            <label for="eventDescription">Description</label>
 	                        </div>
 	                        <div class="col-md-10">
-	                            <textarea rows="4" class="form-control" placeholder="Add Event Description" id="eventDescription"></textarea>
+	                            <textarea rows="4" class="form-control" placeholder="Add Event Description" id="eventDescription" maxlength="2000"></textarea>
 	                        </div>
 	                    </div>
 	            </div>

@@ -75,6 +75,10 @@ $(function() {
 		  success: upcomingEventsSuccess,
 		  error:function(resp){
 			  console && console.log('Error in geting upcoming events:',resp);
+			  var sResult = '<table class = "table"><tr>';
+				sResult += 'Oops... Something Went Wrong ! Please try after some time.</tr>';
+				$('#upcomingEvents').append(sResult);
+				return;
 		  },
 		  dataType: 'json'
 		});
@@ -85,6 +89,10 @@ $(function() {
 		  success: importantEventsSuccess,
 		  error:function(resp){
 			  console && console.log('Error in geting important events:',resp);
+			  var sResult = '<table class = "table"><tr><td colspan="5">';
+				sResult += 'Oops... Something Went Wrong ! Please try after some time.</td> </tr>';
+				$('#importantEvents').append(sResult);
+				return;
 		  },
 		  dataType: 'json'
 		});
@@ -94,6 +102,10 @@ $(function() {
 		  success: featuredEventsSuccess,
 		  error:function(resp){
 			  console && console.log('Error in geting featured events:',resp);
+			  var sResult = '<table class = "table"><tr><td colspan="5">';
+				sResult += 'Oops... Something Went Wrong ! Please try after some time.</td> </tr>';
+				$('#featuredEvents').append(sResult);
+				return;
 		  },
 		  dataType: 'json'
 		});

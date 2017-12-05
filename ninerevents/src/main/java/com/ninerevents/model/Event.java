@@ -20,6 +20,8 @@ public class Event {
 	private Date startDateTime;
 	//@JsonFormat(pattern="yyyy-MM-ddTHH:mm:ss.SSSZ")
 	private Date endDateTime;
+    private String rating;
+    private String comments;
 	/*private Date event_date;
 	private String start_time;
 	private String end_time;
@@ -89,6 +91,21 @@ public class Event {
 	}
 	public String getEventName() {
 		return eventName;
+	}
+	public void setRating(String rating) {
+		this.rating = rating;
+	}
+	
+	public String getRating() {
+		return rating;
+	}
+	
+	public void setComments(String comments) {
+		this.comments = comments;
+	}
+	
+	public String getComments() {
+		return comments;
 	}
 	public void setEventName(String eventName) {
 		this.eventName = eventName;

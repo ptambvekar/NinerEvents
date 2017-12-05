@@ -43,7 +43,7 @@
 		background-color: #f5f5f5;
 		}
 		.top-adjust {
-		margin-top:5%;
+		margin-top:80px;
 		}
 
         /* Size for Material Icons */
@@ -116,6 +116,13 @@
                         	<div class="row mt-5">
                         		<div class="col">
                         			<a href="jsp/addNewEvent.jsp" class="btn btn-outline-primary btn-block">Create Event</a>
+                        		</div>
+                        		
+                        	</div>
+                        	
+                        	<div class="row mt-5">
+                        		<div class="col">
+                        			<a href="jsp/review.jsp" class="btn btn-outline-primary btn-block">Give Feedback</a>
                         		</div>
                         		
                         	</div>
